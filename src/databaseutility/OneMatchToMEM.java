@@ -1,13 +1,11 @@
-package databaseutility.database_memory;
+package databaseutility;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import common.mydatastructure.MyDate;
-
 import po.PlayerPerformanceOfOneMatchPo;
 import po.TeamPerformanceOfOneMatchPo;
-import databaseutility.OneMatch;
 
 public class OneMatchToMEM extends OneMatch {
 

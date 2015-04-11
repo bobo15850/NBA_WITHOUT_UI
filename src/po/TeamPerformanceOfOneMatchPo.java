@@ -54,7 +54,6 @@ public class TeamPerformanceOfOneMatchPo {
 			this.scoreNumber += temp.getScoreNumber();
 			this.playingTime.plus(temp.getPlayingTime());
 		}
-
 	}
 
 	public TeamPerformanceOfOneMatchPo() {
@@ -205,51 +204,6 @@ public class TeamPerformanceOfOneMatchPo {
 	public int getScoreNumber() {
 		return this.scoreNumber;
 	}// 得到得分数
-
-	public String toDBString() {
-		String resultString = "(`teamNameForShort`, `date`, `season`, `opponentTeamName`, `playingTime`,"
-				+ "`totalHitNumber`, `totalShootNumber`, `threePointHitNumber`, "
-				+ "`threePointShootNumber`, `freePointHitNumber`, `freePointShootNumber`,"
-				+ " `offensiveReboundNumber`, `defensiveReboundNumber`, `totalReboundNumber`,"
-				+ " `assistNumber`, `stealNumber`, `blockNumber`," + " `turnoverNumber`, `foulNumber`, `scoreNumber`)"
-				+ " VALUES ('"
-				+ this.getTeamNameForShort()
-				+ "','"
-				+ this.getDate().getFormatString()
-				+ "','"
-				+ this.getSeason().getFormatStyleOfSeason()
-				+ "','"
-				+ this.getOpponentTeamNameForShort()
-				+ "','"
-				+ this.getPlayingTime().getTimeFormatString()
-				+ "','"
-				+ this.getTotalHitNumber()
-				+ "','"
-				+ this.getTotalShootNumber()
-				+ "','"
-				+ this.getThreePointHitNumber()
-				+ "','"
-				+ this.getThreePointShootNumber()
-				+ "','"
-				+ this.getFreePointHitNumber()
-				+ "','"
-				+ this.getFreePointShootNumber()
-				+ "','"
-				+ this.getOffensiveReboundNumber()
-				+ "','"
-				+ this.getDefensiveReboundNumber()
-				+ "','"
-				+ this.getTotalReboundNumber()
-				+ "','"
-				+ this.getAssistNumber()
-				+ "','"
-				+ this.getStealNumber()
-				+ "','"
-				+ this.getBlockNumber()
-				+ "','"
-				+ this.getTurnoverNumber() + "','" + this.getFoulNumber() + "','" + this.getScoreNumber() + "')";
-		return resultString;
-	}
 
 	public MyTime getPlayingTime() {
 		return playingTime;

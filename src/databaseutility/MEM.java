@@ -1,4 +1,4 @@
-package databaseutility.database_memory;
+package databaseutility;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,8 +14,7 @@ import po.TeamPerformanceOfOneMatchPo;
 
 import common.mydatastructure.Height;
 import common.mydatastructure.MyDate;
-import common.mydatastructure.Weight;
-import common.statics.EnumMethod;
+import common.statics.Method;
 import common.statics.NUMBER;
 import common.statics.PathOfFile;
 
@@ -92,10 +91,10 @@ public class MEM {
 		GeneralInfoOfPlayerPo playerInfoPo = new GeneralInfoOfPlayerPo();
 		playerInfoPo.setName(element[0]);
 		playerInfoPo.setNumber(element[1]);
-		playerInfoPo.setPosition(EnumMethod.toPosition(element[2]));
+		playerInfoPo.setPosition(element[2]);
 		playerInfoPo.setHeight(new Height(element[3]));
-		playerInfoPo.setWeight(new Weight(toInt(element[4])));
-		int month = EnumMethod.toMonthInt(element[5].substring(0, 3));
+		playerInfoPo.setWeight(toInt(element[4]));
+		int month = Method.toMonthInt(element[5].substring(0, 3));
 		String[] dates = element[5].split(",");
 		int year = toInt(dates[1].trim());
 		int day = toInt(dates[0].substring(4).trim());
@@ -114,8 +113,8 @@ public class MEM {
 		TeamInfoPo.setTeamName(part[0].trim().substring(1));
 		TeamInfoPo.setTeamNameForShort(teamNameForShort);
 		TeamInfoPo.setLocation(part[2].trim());
-		TeamInfoPo.setConference(EnumMethod.toConference(part[3].trim()));
-		TeamInfoPo.setDivision(EnumMethod.toDivision(part[4].trim()));
+		TeamInfoPo.setConference(part[3].trim());
+		TeamInfoPo.setDivision(part[4].trim());
 		TeamInfoPo.setHomeField(part[5].trim());
 		TeamInfoPo.setEstablishYear(toInt(part[6].trim().substring(0, 4)));
 		MEM.TEAM_GENERALINFO.put(teamNameForShort, TeamInfoPo);

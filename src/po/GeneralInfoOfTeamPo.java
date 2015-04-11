@@ -1,8 +1,5 @@
 package po;
 
-import common.enums.Conference;
-import common.enums.Division;
-
 /*
  * 该类定义球队的自然信息
  */
@@ -10,8 +7,8 @@ public class GeneralInfoOfTeamPo {
 	private String teamNameForShort;// 队名缩写
 	private String teamName;// 球队名称
 	private String location;// 球队所在地
-	private Conference conference;// 赛区
-	private Division division;// 分区
+	private String conference;// 赛区
+	private String division;// 分区
 	private String homeField;// 球队主场
 	private int establishYear;// 建立时间
 
@@ -27,11 +24,11 @@ public class GeneralInfoOfTeamPo {
 		this.location = location;
 	}// 设置球队地址
 
-	public void setConference(Conference conference) {
+	public void setConference(String conference) {
 		this.conference = conference;
 	}// 设置球队所属联盟
 
-	public void setDivision(Division division) {
+	public void setDivision(String division) {
 		this.division = division;
 	}// 设置球队所属赛区
 
@@ -55,11 +52,11 @@ public class GeneralInfoOfTeamPo {
 		return this.location;
 	}// 得到球队地址
 
-	public Conference getConference() {
+	public String getConference() {
 		return this.conference;
 	}// 得到球队所属联盟
 
-	public Division getDivision() {
+	public String getDivision() {
 		return this.division;
 	}// 得到球队所属赛区
 
@@ -70,12 +67,4 @@ public class GeneralInfoOfTeamPo {
 	public int getEstablishYear() {
 		return this.establishYear;
 	}// 得到建立时间
-
-	public String toDBString() {
-		String resultString = "(`teamNameForShort`,`teamName`,  `location`," + " `conference`, `division`, `homeField`," + " `establishYear`) "
-				+ " VALUES ('" + this.getTeamNameForShort() + "','" + this.getTeamName() + "','" + this.getLocation() + "','"
-				+ this.getConference().toString() + "','" + this.getDivision().toString() + "','" + this.getHomeField() + "','"
-				+ this.getEstablishYear() + "')";
-		return resultString;
-	}
 }

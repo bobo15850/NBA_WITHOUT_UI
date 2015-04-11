@@ -157,13 +157,13 @@ public class OneMatch {
 		}
 	}
 
-	private int toIntForCorrect(String str) {
-		try {
-			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
-			return 0;
-		}
-	}// 为了进行脏数据处理
+//	private int toIntForCorrect(String str) {
+//		try {
+//			return Integer.parseInt(str);
+//		} catch (NumberFormatException e) {
+//			return 0;
+//		}
+//	}// 为了进行脏数据处理
 
 	protected boolean isDataCorrect() {
 		DataCorrection.correctTotalPlayingTime(firstTeamPerformance);

@@ -98,7 +98,6 @@ public class PlayerPerformanceOfOneMatchPo {
 	public void setScoreNumber(int scoreNumber) {
 		this.scoreNumber = scoreNumber;
 	}// 设置得分数
-		// ///////////////////////////////////////////////////////////////////////////
 
 	public String getTeamNameForShort() {
 		return this.teamNameForShort;
@@ -177,15 +176,7 @@ public class PlayerPerformanceOfOneMatchPo {
 	}
 
 	public void setNameOfPlayer(String nameOfPlayer) {
-		if (nameOfPlayer.contains("'")) {
-			String part[] = nameOfPlayer.split("'");
-			this.playerName = part[0];
-			for (int i = 1; i < part.length; i++) {
-				this.playerName = this.playerName + " " + part[i];
-			}
-		} else {
-			this.playerName = nameOfPlayer;
-		}// 防止有特殊字符
+		this.playerName = nameOfPlayer;
 	}
 
 	public MyDate getDate() {
@@ -202,55 +193,5 @@ public class PlayerPerformanceOfOneMatchPo {
 
 	public void setSeason(Season season) {
 		this.season = season;
-	}
-
-	public String toDBString() {
-		String resultString = "(`playerName`, `date`,`season`, `teamNameForShort`, " + "`isFirst`, `playingTime`, `totalHitNumber`, "
-				+ "`totalShootNumber`, `threePointHitNumber`, `threePointShootNumber`,"
-				+ " `freePointHitNumber`, `freePointShootNumber`, `offensiveReboundNumber`, "
-				+ "`defensiveReboundNumber`, `totalReboundNumber`, `assistNumber`, " + "`stealNumber`, `blockNumber`, `turnoverNumber`,"
-				+ " `foulNumber`, `scoreNumber`) " + " VALUES ('"
-				+ this.getNameOfPlayer()
-				+ "','"
-				+ this.getDate().getFormatString()
-				+ "','"
-				+ this.getSeason().getFormatStyleOfSeason()
-				+ "','"
-				+ this.getTeamNameForShort()
-				+ "','"
-				+ String.valueOf(this.getIsFirst())
-				+ "','"
-				+ this.getPlayingTime().getTimeFormatString()
-				+ "','"
-				+ this.getTotalHitNumber()
-				+ "','"
-				+ this.getTotalShootNumber()
-				+ "','"
-				+ this.getThreePointHitNumber()
-				+ "','"
-				+ this.getThreePointShootNumber()
-				+ "','"
-				+ this.getFreePointHitNumber()
-				+ "','"
-				+ this.getFreePointShootNumber()
-				+ "','"
-				+ this.getOffensiveReboundNumber()
-				+ "','"
-				+ this.getDefensiveReboundNumber()
-				+ "','"
-				+ this.getTotalReboundNumber()
-				+ "','"
-				+ this.getAssistNumber()
-				+ "','"
-				+ this.getStealNumber()
-				+ "','"
-				+ this.getBlockNumber()
-				+ "','"
-				+ this.getTurnoverNumber()
-				+ "','"
-				+ this.getFoulNumber()
-				+ "','"
-				+ this.getScoreNumber() + "')";
-		return resultString;
 	}
 }
