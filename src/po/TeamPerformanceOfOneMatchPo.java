@@ -3,13 +3,12 @@ package po;
 import java.util.ArrayList;
 
 import common.mydatastructure.MyDate;
-import common.mydatastructure.Season;
 import common.mydatastructure.MyTime;
 
 public class TeamPerformanceOfOneMatchPo {
 	private String TeamNameForShort;// 球队名称缩写
 	private MyDate date;// 比赛时间
-	private Season season;// 赛季
+	private MyTime playingTime = new MyTime();// 球员上场时间之和
 	private String opponentTeamNameForShort;// 对手名称
 	private int totalHitNumber;// 总命中数
 	private int totalShootNumber;// 总出手数
@@ -26,14 +25,12 @@ public class TeamPerformanceOfOneMatchPo {
 	private int turnoverNumber;// 失误数
 	private int foulNumber;// 犯规数
 	private int scoreNumber;// 得分数
-	private MyTime playingTime = new MyTime();// 球员上场时间之和
 
-	public TeamPerformanceOfOneMatchPo(String teamName, String opponentTeamName, MyDate date, Season season,
+	public TeamPerformanceOfOneMatchPo(String teamName, String opponentTeamName, MyDate date,
 			ArrayList<PlayerPerformanceOfOneMatchPo> listOfPlayerPerformanceOfOneMatch) {
 		this.TeamNameForShort = teamName;
 		this.opponentTeamNameForShort = opponentTeamName;
 		this.date = date;
-		this.season = season;
 		PlayerPerformanceOfOneMatchPo temp;
 		for (int i = 0; i < listOfPlayerPerformanceOfOneMatch.size(); i++) {
 			temp = listOfPlayerPerformanceOfOneMatch.get(i);
@@ -131,7 +128,6 @@ public class TeamPerformanceOfOneMatchPo {
 	public void setScoreNumber(int scoreNumber) {
 		this.scoreNumber = scoreNumber;
 	}// 设置得分数
-		// //////////////////////////
 
 	public String getTeamNameForShort() {
 		return this.TeamNameForShort;
@@ -213,11 +209,13 @@ public class TeamPerformanceOfOneMatchPo {
 		this.playingTime = playingTime;
 	}
 
-	public Season getSeason() {
-		return season;
-	}
-
-	public void setSeason(Season season) {
-		this.season = season;
+	public String toString() {
+		return "队名：" + this.getTeamNameForShort() + "---比赛日期：" + this.getDate().getFormatString() + "---对手：" + this.getOpponentTeamNameForShort()
+				+ "---比赛时间：" + this.getPlayingTime().getTimeFormatString() + "---总命中数：" + this.getTotalHitNumber() + "---总出手数："
+				+ this.getTotalShootNumber() + "---三分总命中数：" + this.getThreePointHitNumber() + "---三分总命中数：" + this.getThreePointShootNumber()
+				+ "---罚球总出手数：" + this.getFreePointHitNumber() + "---罚球总命中数：" + this.getFreePointShootNumber() + "---进攻篮板数："
+				+ this.getOffensiveReboundNumber() + "---防守篮板数：" + this.getDefensiveReboundNumber() + "---总篮板数：" + this.getTotalReboundNumber()
+				+ "---助攻数：" + this.getAssistNumber() + "---抢断数：" + this.getStealNumber() + "---盖帽数：" + this.getBlockNumber() + "---失误数："
+				+ this.getTurnoverNumber() + "---犯规数：" + this.getFoulNumber() + "---得分数：" + this.getScoreNumber();
 	}
 }

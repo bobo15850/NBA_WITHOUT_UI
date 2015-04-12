@@ -22,4 +22,11 @@ public class Command {
 	public static final String filter = "-filter";
 	// 排序依据
 	public static final String sort = "-sort";
+	public static final String ascend = "asc";
+	public static final String descend = "desc";
+	//
+	public static final String dot = ".";
+	public static final String position = "position";
+	public static final String league = "league";
+	public static final String age = "age";
 }

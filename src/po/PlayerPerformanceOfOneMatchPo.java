@@ -1,15 +1,12 @@
 package po;
 
 import common.mydatastructure.MyDate;
-import common.mydatastructure.Season;
 import common.mydatastructure.MyTime;
 
 public class PlayerPerformanceOfOneMatchPo {
 	private String playerName;// 球员姓名
 	private String teamNameForShort;// 效力球队
-	private Season season;// 赛季
 	private MyDate date;// 比赛时间
-	private boolean isFirst;// 是否先发
 	private MyTime playingTime;// 上场时间
 	private int totalHitNumber;// 总命中数
 	private int totalShootNumber;// 总出手数
@@ -30,10 +27,6 @@ public class PlayerPerformanceOfOneMatchPo {
 	public void setTeamNameForShort(String teamName) {
 		this.teamNameForShort = teamName;
 	}// 设置效力球队
-
-	public void setIsFirst(boolean isFirst) {
-		this.isFirst = isFirst;
-	}// 是否先发
 
 	public void setPlayingTime(MyTime playingTime) {
 		this.playingTime = playingTime;
@@ -102,10 +95,6 @@ public class PlayerPerformanceOfOneMatchPo {
 	public String getTeamNameForShort() {
 		return this.teamNameForShort;
 	}// 得到效力球队
-
-	public boolean getIsFirst() {
-		return this.isFirst;
-	}// 是否先发
 
 	public MyTime getPlayingTime() {
 		return this.playingTime;
@@ -187,11 +176,13 @@ public class PlayerPerformanceOfOneMatchPo {
 		this.date = date;
 	}
 
-	public Season getSeason() {
-		return season;
-	}
-
-	public void setSeason(Season season) {
-		this.season = season;
+	public String toString() {
+		return "姓名：" + this.getNameOfPlayer() + "---比赛时间：" + this.getDate().getFormatString() + "---效力球队：" + this.getTeamNameForShort() + "---上场时间："
+				+ this.getPlayingTime().getTimeFormatString() + "---总命中数：" + this.getTotalHitNumber() + "---总出手数：" + this.getTotalShootNumber()
+				+ "---三分命中数：" + this.getThreePointHitNumber() + "---三分出手数：" + this.getThreePointShootNumber() + "---罚球命中数："
+				+ this.getFreePointHitNumber() + "---罚球出手数：" + this.getFreePointShootNumber() + "---进攻篮板数：" + this.getOffensiveReboundNumber()
+				+ "---防守篮板数：" + this.getDefensiveReboundNumber() + "---总篮板数：" + this.getTotalReboundNumber() + "---助攻数：" + this.getAssistNumber()
+				+ "---抢断数：" + this.getStealNumber() + "---盖帽数：" + this.getBlockNumber() + "---失误数：" + this.getTurnoverNumber() + "---犯规数："
+				+ this.getFoulNumber() + "---得分数：" + this.getScoreNumber();
 	}
 }

@@ -31,8 +31,8 @@ public class Field {
 	public static final String defendRebound = "defendRebound";
 	public static final String offendRebound = "offendRebound";
 	//
-	public static final String winRate = "offendRebound";
-	public static final String offendRound = "offendRebound";
-	public static final String offendEfficient = "offendRebound";
-	public static final String defendEfficient = "offendRebound";
+	public static final String winRate = "winRate";
+	public static final String offendRound = "offendRound";
+	public static final String offendEfficient = "offendEfficient";
+	public static final String defendEfficient = "defendEfficient";
 }
