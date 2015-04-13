@@ -21,11 +21,9 @@ public class CACHE {
 	public static Map<String, TeamNormalInfo> TEAM_TODAY = new TreeMap<String, TeamNormalInfo>();
 
 	static {
-		PlayerInfoInit.initPlayerNormalCache();
-		PlayerInfoInit.initPlayerHighCache();
+		PlayerInfoInit.initPlayerCache();
 		PlayerInfoInit.initPlayerTodayCache();
-		TeamInfoInit.initTeamNormalCache();
-		TeamInfoInit.initTeamHighCache();
+		TeamInfoInit.initTeamCache();
 		TeamInfoInit.initTeamTodayCache();
 	}
 }

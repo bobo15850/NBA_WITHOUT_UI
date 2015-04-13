@@ -114,19 +114,18 @@ public class Terminal {
 
 	private void playerKing() {
 		PlayerKingInfo resultArray[] = null;
-		int number = 5;
 		String field = commandArray[2];
 		if (commandArray[3].equals(Command.season)) {
-			resultArray = this.playerBl.getPlayerKingOfSeason(number, field);
-			System.out.println(field + Command.season + "--" + String.valueOf(number));
+			resultArray = this.playerBl.getPlayerKingOfSeason(field);
+			System.out.println(field + Command.season);
 			// 赛季field平均数据王
 		}
 		else if (commandArray[3].equals(Command.daily)) {
-			resultArray = this.playerBl.getPlayerKingOfDaily(number, field);
-			System.out.println(field + Command.daily + "--" + String.valueOf(number));
+			resultArray = this.playerBl.getPlayerKingOfDaily(field);
+			System.out.println(field + Command.daily);
 			// 当日field平均数据王
 		}
-		this.addPrintStream(resultArray, number);
+		this.addPrintStream(resultArray, 1);
 	}
 
 	private void playerHot() {

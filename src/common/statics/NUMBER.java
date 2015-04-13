@@ -7,4 +7,5 @@ public class NUMBER {
 	public static final int FINISH_MONTH_OF_SEASON = 4;// NBA赛季结束月份
 	public static final int NUMBER_OF_FIRST = 5;// 首发人数
 	public static final int DEFAULT_NUMBER = 50;// 筛选出的球员人数
+	public static final int UNKNOWN_AGE = -1;// 年龄未知
 }

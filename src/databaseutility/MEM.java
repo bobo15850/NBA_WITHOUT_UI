@@ -97,10 +97,10 @@ public class MEM {
 	private static void writeTeamInfoToMEM(String formatdetail) {
 		String[] part = formatdetail.split("│");
 		String league = part[3].trim();
-		if (league.equals(League.East)) {
+		if (league.equals("E")) {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.East);
 		}
-		else if (league.equals(League.West)) {
+		else if (league.equals("W")) {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.West);
 		}
 	}
@@ -112,4 +112,5 @@ public class MEM {
 			return -1;
 		}
 	}
+
 }

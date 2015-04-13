@@ -10,9 +10,9 @@ import test.data.PlayerNormalInfo;
 public interface PlayerAutoTestService {
 	public PlayerHotInfo[] getPlayerHot(int number, String field);// 得到热门球员数组
 
-	public PlayerKingInfo[] getPlayerKingOfSeason(int number, String field);// 得到赛季数据王数组
+	public PlayerKingInfo[] getPlayerKingOfSeason(String field);// 得到赛季数据王数组
 
-	public PlayerKingInfo[] getPlayerKingOfDaily(int number, String field);// 得到当日数据王数组
+	public PlayerKingInfo[] getPlayerKingOfDaily(String field);// 得到当日数据王数组
 
 	public PlayerHighInfo[] getPlayerHigh(int number, SortCell[] sortcells);// 得到球员高阶数据
 

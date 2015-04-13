@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import po.PlayerPerformanceOfOneMatchPo;
 import po.TeamPerformanceOfOneMatchPo;
-
 import common.mydatastructure.MyDate;
 import common.mydatastructure.MyTime;
 import common.statics.NUMBER;
@@ -37,21 +36,41 @@ class OneMatch {
 			matchReader.readLine();
 			this.getMainInfoOfMatch(mainInfo);// 得到比赛的主要信息，包括得分,时间
 			this.firstTeam = matchReader.readLine().trim();// 初始化第一个队名
+
+			for (int j = 0; j < NUMBER.NUMBER_OF_FIRST; j++) {
+				temp = matchReader.readLine();
+				listOfFirstTeamPlayerPerformance.add(this.getFirstTeamFirstPlayerPo(temp));
+			}
 			while ((temp = matchReader.readLine()).length() != 3) {
-				listOfFirstTeamPlayerPerformance.add(this.getFirstTeamPlayerPo(temp));
+				listOfFirstTeamPlayerPerformance.add(this.getFirstTeamReplacePlayerPo(temp));
 			}
-			this.secondTeam = temp.trim();// 初始化第二个队名
+			String secondTeam = temp.trim();
+			this.secondTeam = secondTeam;// 初始化第二个队名
+			for (int i = 0; i < NUMBER.NUMBER_OF_FIRST; i++) {
+				temp = matchReader.readLine();
+				listOfSecondTeamPlayerPerformance.add(this.getSecondTeamFirstPlayerPo(temp));
+			}
 			while ((temp = matchReader.readLine()) != null) {
-				listOfSecondTeamPlayerPerformance.add(this.getSecondTeamPlayerPo(temp));
+				listOfSecondTeamPlayerPerformance.add(this.getSecondTeamReplacePlayerPo(temp));
 			}
+
 			matchReader.close();
-			this.firstTeamPerformance = new TeamPerformanceOfOneMatchPo(this.firstTeam, this.secondTeam, this.date,
+			this.firstTeamPerformance = new TeamPerformanceOfOneMatchPo(this.firstTeam, this.secondTeam, this.date, isFirstWin(),
 					this.listOfFirstTeamPlayerPerformance);
-			this.secondTeamPerformance = new TeamPerformanceOfOneMatchPo(this.secondTeam, this.firstTeam, this.date,
+			this.secondTeamPerformance = new TeamPerformanceOfOneMatchPo(this.secondTeam, this.firstTeam, this.date, 1 - isFirstWin(),
 					this.listOfSecondTeamPlayerPerformance);
 			this.isDataCorrect = this.isDataCorrect();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private int isFirstWin() {
+		if (this.firstTeamSocre > this.secondTeamScore) {
+			return 1;
+		}
+		else {
+			return 0;
 		}
 	}
 
@@ -76,11 +95,12 @@ class OneMatch {
 		this.date = new MyDate(year, month, day);
 	}// 根据第一行文本得到比赛主要信息
 
-	private PlayerPerformanceOfOneMatchPo getFirstTeamPlayerPo(String temp) {
+	private PlayerPerformanceOfOneMatchPo getFirstTeamFirstPlayerPo(String temp) {
 		PlayerPerformanceOfOneMatchPo resultPo = new PlayerPerformanceOfOneMatchPo();
 		String part[] = temp.split(";");
 		resultPo.setTeamNameForShort(firstTeam);
 		resultPo.setDate(date);
+		resultPo.setStart(1);
 		resultPo.setNameOfPlayer(part[0]);
 		resultPo.setPlayingTime(new MyTime(part[2]));
 		resultPo.setTotalHitNumber(this.toInt(part[3]));
@@ -95,17 +115,30 @@ class OneMatch {
 		resultPo.setAssistNumber(this.toInt(part[12]));
 		resultPo.setStealNumber(this.toInt(part[13]));
 		resultPo.setBlockNumber(this.toInt(part[14]));
-		resultPo.setTurnoverNumber(this.toInt(part[15]));
+		resultPo.setFaultNumber(this.toInt(part[15]));
 		resultPo.setFoulNumber(this.toInt(part[16]));
 		resultPo.setScoreNumber(this.toInt(part[17]));
 		return resultPo;
 	}// 第一队首发
 
-	private PlayerPerformanceOfOneMatchPo getSecondTeamPlayerPo(String temp) {
-		PlayerPerformanceOfOneMatchPo resultPo = this.getFirstTeamPlayerPo(temp);
+	private PlayerPerformanceOfOneMatchPo getFirstTeamReplacePlayerPo(String temp) {
+		PlayerPerformanceOfOneMatchPo resultPo = this.getFirstTeamFirstPlayerPo(temp);
+		resultPo.setStart(0);
+		return resultPo;
+	}// 第一队替补
+
+	private PlayerPerformanceOfOneMatchPo getSecondTeamFirstPlayerPo(String temp) {
+		PlayerPerformanceOfOneMatchPo resultPo = this.getFirstTeamFirstPlayerPo(temp);
 		resultPo.setTeamNameForShort(secondTeam);
 		return resultPo;
 	}// 第二队首发
+
+	private PlayerPerformanceOfOneMatchPo getSecondTeamReplacePlayerPo(String temp) {
+		PlayerPerformanceOfOneMatchPo resultPo = this.getFirstTeamFirstPlayerPo(temp);
+		resultPo.setTeamNameForShort(secondTeam);
+		resultPo.setStart(0);
+		return resultPo;
+	}// 第二队替补
 
 	private int toInt(String str) {
 		try {

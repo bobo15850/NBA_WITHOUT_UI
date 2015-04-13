@@ -7,6 +7,7 @@ public class PlayerPerformanceOfOneMatchPo {
 	private String playerName;// 球员姓名
 	private String teamNameForShort;// 效力球队
 	private MyDate date;// 比赛时间
+	private int start;// 是否首发
 	private MyTime playingTime;// 上场时间
 	private int totalHitNumber;// 总命中数
 	private int totalShootNumber;// 总出手数
@@ -20,7 +21,7 @@ public class PlayerPerformanceOfOneMatchPo {
 	private int assistNumber;// 助攻
 	private int stealNumber;// 抢断数
 	private int blockNumber;// 盖帽数
-	private int turnoverNumber;// 失误数
+	private int faultNumber;// 失误数
 	private int foulNumber;// 犯规数
 	private int scoreNumber;// 得分数
 
@@ -80,8 +81,8 @@ public class PlayerPerformanceOfOneMatchPo {
 		this.blockNumber = blockNumber;
 	}// 设置盖帽数
 
-	public void setTurnoverNumber(int turnoverNumber) {
-		this.turnoverNumber = turnoverNumber;
+	public void setFaultNumber(int faultNumber) {
+		this.faultNumber = faultNumber;
 	}// 设置失误数
 
 	public void setFoulNumber(int foulNumber) {
@@ -148,8 +149,8 @@ public class PlayerPerformanceOfOneMatchPo {
 		return this.blockNumber;
 	}// 得到盖帽数
 
-	public int getTurnoverNumber() {
-		return this.turnoverNumber;
+	public int getFaultNumber() {
+		return this.faultNumber;
 	}// 得到失误数
 
 	public int getFoulNumber() {
@@ -182,7 +183,15 @@ public class PlayerPerformanceOfOneMatchPo {
 				+ "---三分命中数：" + this.getThreePointHitNumber() + "---三分出手数：" + this.getThreePointShootNumber() + "---罚球命中数："
 				+ this.getFreePointHitNumber() + "---罚球出手数：" + this.getFreePointShootNumber() + "---进攻篮板数：" + this.getOffensiveReboundNumber()
 				+ "---防守篮板数：" + this.getDefensiveReboundNumber() + "---总篮板数：" + this.getTotalReboundNumber() + "---助攻数：" + this.getAssistNumber()
-				+ "---抢断数：" + this.getStealNumber() + "---盖帽数：" + this.getBlockNumber() + "---失误数：" + this.getTurnoverNumber() + "---犯规数："
+				+ "---抢断数：" + this.getStealNumber() + "---盖帽数：" + this.getBlockNumber() + "---失误数：" + this.getFaultNumber() + "---犯规数："
 				+ this.getFoulNumber() + "---得分数：" + this.getScoreNumber();
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
 	}
 }

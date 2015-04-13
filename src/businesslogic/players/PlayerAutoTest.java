@@ -15,11 +15,11 @@ public class PlayerAutoTest implements PlayerAutoTestService {
 		return null;
 	}
 
-	public PlayerKingInfo[] getPlayerKingOfSeason(int number, String field) {
+	public PlayerKingInfo[] getPlayerKingOfSeason(String field) {
 		return null;
 	}
 
-	public PlayerKingInfo[] getPlayerKingOfDaily(int number, String field) {
+	public PlayerKingInfo[] getPlayerKingOfDaily(String field) {
 		return null;
 	}
 

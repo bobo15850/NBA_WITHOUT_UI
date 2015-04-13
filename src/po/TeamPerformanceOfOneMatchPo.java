@@ -10,6 +10,7 @@ public class TeamPerformanceOfOneMatchPo {
 	private MyDate date;// 比赛时间
 	private MyTime playingTime = new MyTime();// 球员上场时间之和
 	private String opponentTeamNameForShort;// 对手名称
+	private int win;// 是否赢球
 	private int totalHitNumber;// 总命中数
 	private int totalShootNumber;// 总出手数
 	private int threePointHitNumber;// 三分命中数
@@ -26,11 +27,12 @@ public class TeamPerformanceOfOneMatchPo {
 	private int foulNumber;// 犯规数
 	private int scoreNumber;// 得分数
 
-	public TeamPerformanceOfOneMatchPo(String teamName, String opponentTeamName, MyDate date,
+	public TeamPerformanceOfOneMatchPo(String teamName, String opponentTeamName, MyDate date, int win,
 			ArrayList<PlayerPerformanceOfOneMatchPo> listOfPlayerPerformanceOfOneMatch) {
 		this.TeamNameForShort = teamName;
 		this.opponentTeamNameForShort = opponentTeamName;
 		this.date = date;
+		this.win = win;
 		PlayerPerformanceOfOneMatchPo temp;
 		for (int i = 0; i < listOfPlayerPerformanceOfOneMatch.size(); i++) {
 			temp = listOfPlayerPerformanceOfOneMatch.get(i);
@@ -46,7 +48,7 @@ public class TeamPerformanceOfOneMatchPo {
 			this.assistNumber += temp.getAssistNumber();
 			this.stealNumber += temp.getStealNumber();
 			this.blockNumber += temp.getBlockNumber();
-			this.turnoverNumber += temp.getTurnoverNumber();
+			this.turnoverNumber += temp.getFaultNumber();
 			this.foulNumber += temp.getFoulNumber();
 			this.scoreNumber += temp.getScoreNumber();
 			this.playingTime.plus(temp.getPlayingTime());
@@ -165,11 +167,11 @@ public class TeamPerformanceOfOneMatchPo {
 		return this.freePointShootNumber;
 	}// 得到总罚球出手数
 
-	public int getOffensiveReboundNumber() {
+	public int getOffendReboundNumber() {
 		return this.offensiveReboundNumber;
 	}// 得到总进攻篮板数
 
-	public int getDefensiveReboundNumber() {
+	public int getDefendReboundNumber() {
 		return this.defensiveReboundNumber;
 	}// 得到总防守篮板数
 
@@ -189,7 +191,7 @@ public class TeamPerformanceOfOneMatchPo {
 		return this.blockNumber;
 	}// 得到盖帽数
 
-	public int getTurnoverNumber() {
+	public int getFaultNumber() {
 		return this.turnoverNumber;
 	}// 得到失误数
 
@@ -214,8 +216,16 @@ public class TeamPerformanceOfOneMatchPo {
 				+ "---比赛时间：" + this.getPlayingTime().getTimeFormatString() + "---总命中数：" + this.getTotalHitNumber() + "---总出手数："
 				+ this.getTotalShootNumber() + "---三分总命中数：" + this.getThreePointHitNumber() + "---三分总命中数：" + this.getThreePointShootNumber()
 				+ "---罚球总出手数：" + this.getFreePointHitNumber() + "---罚球总命中数：" + this.getFreePointShootNumber() + "---进攻篮板数："
-				+ this.getOffensiveReboundNumber() + "---防守篮板数：" + this.getDefensiveReboundNumber() + "---总篮板数：" + this.getTotalReboundNumber()
+				+ this.getOffendReboundNumber() + "---防守篮板数：" + this.getDefendReboundNumber() + "---总篮板数：" + this.getTotalReboundNumber()
 				+ "---助攻数：" + this.getAssistNumber() + "---抢断数：" + this.getStealNumber() + "---盖帽数：" + this.getBlockNumber() + "---失误数："
-				+ this.getTurnoverNumber() + "---犯规数：" + this.getFoulNumber() + "---得分数：" + this.getScoreNumber();
+				+ this.getFaultNumber() + "---犯规数：" + this.getFoulNumber() + "---得分数：" + this.getScoreNumber();
+	}
+
+	public int getWin() {
+		return win;
+	}
+
+	public void setWin(int win) {
+		this.win = win;
 	}
 }

@@ -27,8 +27,9 @@ public class Refresh extends Thread {
 						OneMatch_add oneMatch = new OneMatch_add(matchName);
 						matches.add(oneMatch);
 						oneMatch.writeDetailInfoOfPlayerAndTeamToMEN();
-						oneMatch.writePlayerNormalInfoToCACHE();
 						oneMatch.writeTeamNormalInfoToCACHE();
+						oneMatch.writeTeamHighInfoToCACHE();
+						oneMatch.writePlayerNormalInfoToCACHE();
 					}
 				}
 				for (int i = 0; i < matches.size(); i++) {

@@ -2,6 +2,7 @@ package common.statics;
 
 public class Position {
 	public static final String All = "All";
+	public static final String Unknown = "unknow_position";
 	public static final String C = "C";
 	public static final String G = "G";
 	public static final String F = "F";
