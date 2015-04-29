@@ -21,7 +21,10 @@ public class OneMatch_add extends OneMatch_init {
 	}
 
 	public void writePlayerPerformToday() {
-		CACHE.PLAYER_TODAY.clear();
+		if (this.date.compareTo(MEM.LATEST_DATE) > 0) {
+			MEM.LATEST_DATE = this.date;
+			CACHE.PLAYER_TODAY.clear();
+		}
 		for (int i = 0; i < super.listOfFirstTeamPlayerPerformance.size(); i++) {
 			PlayerPerformOfOneMatch player = super.listOfFirstTeamPlayerPerformance.get(i);
 			CACHE.PLAYER_TODAY.put(player.getName(), player);
@@ -88,7 +91,6 @@ public class OneMatch_add extends OneMatch_init {
 	}// 更新cache中的球员普通信息
 
 	private void writeOnePlayerNormalInfoToCACHE(PlayerPerformOfOneMatch playerPerform) {
-
 		String playerName = playerPerform.getName();
 		int doubleOfOneMatch = 0;
 		int doubleTwo = 0;

@@ -6,7 +6,6 @@ import java.util.TreeMap;
 import test.data.PlayerHighInfo;
 import businesslogic.CACHE;
 import businesslogic.teams.CalculationOfTeamPerform;
-
 import common.mydatastructure.GeneralInfoOfPlayer;
 import common.mydatastructure.MyDate;
 import common.mydatastructure.PlayerNormalInfo_Expand;
@@ -15,7 +14,6 @@ import common.mydatastructure.TeamPerformOfOneMatch;
 import common.statics.Age;
 import common.statics.League;
 import common.statics.Position;
-
 import databaseutility.MEM;
 
 public class PlayerInfoInit {
@@ -208,6 +206,12 @@ public class PlayerInfoInit {
 	}
 
 	public static void initPlayerTodayCache() {
-
+		for (Entry<String, TreeMap<MyDate, PlayerPerformOfOneMatch>> onePlayerPerform : MEM.PLAYERS_PERFORM.entrySet()) {
+			String playerName = onePlayerPerform.getKey();
+			TreeMap<MyDate, PlayerPerformOfOneMatch> playerPerform = onePlayerPerform.getValue();
+			if (playerPerform.lastKey().equals(MEM.LATEST_DATE)) {
+				CACHE.PLAYER_TODAY.put(playerName, playerPerform.lastEntry().getValue());
+			}
+		}
 	}
 }

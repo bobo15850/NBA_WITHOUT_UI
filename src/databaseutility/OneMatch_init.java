@@ -19,13 +19,16 @@ public class OneMatch_init extends OneMatch {
 			for (int i = 0; i < listOfFirstTeamPlayerPerformance.size(); i++) {
 				playerPo = listOfFirstTeamPlayerPerformance.get(i);
 				writeDetailInfoOfPlayerPerform(playerPo);
-			}
+			}// 写入第一队的球员数据
 			for (int i = 0; i < listOfSecondTeamPlayerPerformance.size(); i++) {
 				playerPo = listOfSecondTeamPlayerPerformance.get(i);
 				writeDetailInfoOfPlayerPerform(playerPo);
+			}// 写入第二队的球员数据
+			writeDetailInfoOfTeamPerform(firstTeamPerformance);// 写入第一队的球队数据
+			writeDetailInfoOfTeamPerform(secondTeamPerformance);// 写入第二队的球队数据
+			if (this.date.compareTo(MEM.LATEST_DATE) > 0) {
+				MEM.LATEST_DATE = this.date;// 修改当前日期
 			}
-			writeDetailInfoOfTeamPerform(firstTeamPerformance);
-			writeDetailInfoOfTeamPerform(secondTeamPerformance);
 		}
 	}
 

@@ -8,7 +8,7 @@ import businesslogic.CACHE;
 public class Main {
 	public static void main(String args[]) {
 		Terminal console = new Terminal();
-		console.excute(System.out, new String[] { "-player", "-king", "score", "-season", "-n", "3" });
+		console.excute(System.out, new String[] { "-player", "-king", "point", "-season", "-n", "3" });
 		new Refresh().start();
 
 		// for (Entry<String, PlayerHighInfo> temp :

@@ -28,6 +28,8 @@ public class MEM {
 	// 球员数据存储
 	public static HashMap<String, TreeMap<MyDate, TeamPerformOfOneMatch>> TEAM_PERFORM = new HashMap<String, TreeMap<MyDate, TeamPerformOfOneMatch>>();
 	// 球队数据存储
+	public static MyDate LATEST_DATE = new MyDate(0, 0, 0);
+	// 指示当前的日期
 	static {
 		MEM.handleFileOfMatches();
 		MEM.handleFileOfPlayers();
