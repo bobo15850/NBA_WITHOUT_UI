@@ -1,37 +1,38 @@
 package businesslogic.players;
 
-import common.mydatastructure.Filter;
-import common.mydatastructure.SortCell;
+import java.util.ArrayList;
 
 import test.data.PlayerHighInfo;
 import test.data.PlayerHotInfo;
 import test.data.PlayerKingInfo;
 import test.data.PlayerNormalInfo;
+import common.mydatastructure.Filter;
+import common.mydatastructure.SortCell;
 import autoTestService.PlayerAutoTestService;
 
 public class PlayerAutoTest implements PlayerAutoTestService {
 
-	public PlayerHotInfo[] getPlayerHot(int number, String field) {
+	public ArrayList<PlayerHotInfo> getPlayerHot(int number, String field) {
 		return null;
 	}
 
-	public PlayerKingInfo[] getPlayerKingOfSeason(String field) {
+	public ArrayList<PlayerKingInfo> getPlayerKingOfSeason(int number, String field) {
 		return null;
 	}
 
-	public PlayerKingInfo[] getPlayerKingOfDaily(String field) {
+	public ArrayList<PlayerKingInfo> getPlayerKingOfDaily(int number, String field) {
 		return null;
 	}
 
-	public PlayerHighInfo[] getPlayerHigh(int number, SortCell[] sortcells) {
+	public ArrayList<PlayerHighInfo> getPlayerHigh(int number, SortCell[] sortcells) {
 		return null;
 	}
 
-	public PlayerNormalInfo[] getPlayerNormal_avg(int number, Filter filter, SortCell[] sortcells) {
+	public ArrayList<PlayerNormalInfo> getPlayerNormal_avg(int number, Filter filter, SortCell[] sortcells) {
 		return null;
 	}
 
-	public PlayerNormalInfo[] getPlayerNormal_tot(int number, Filter filter, SortCell[] sortcells) {
+	public ArrayList<PlayerNormalInfo> getPlayerNormal_tot(int number, Filter filter, SortCell[] sortcells) {
 		return null;
 	}
 

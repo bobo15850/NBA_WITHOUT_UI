@@ -23,16 +23,23 @@ public class Refresh extends Thread {
 				for (WatchEvent<?> event : watchKey.pollEvents()) {
 					if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
 						matchName = event.context().toString();
+						System.out.println(matchName);
 						OneMatch_add oneMatch = new OneMatch_add(matchName);
-						oneMatch.writeDetailInfoOfPlayerAndTeamToMEN();//第一步应该先将po写入内存中
-						oneMatch.writeTeamNormalInfoToCACHE();//第二步更新球队的普通数据
-						oneMatch.writeTeamHighInfoToCACHE();//第三步更新球队高级数据
-						oneMatch.writePlayerNormalInfoToCACHE();//第四步更新球员普通数据
-						oneMatch.writePlayerHighInfoToCACHE();//第五步更新球员高级数据//这一步一定是最后做，因为只有有了以上数据才能进行这一步
+						oneMatch.writeDetailInfoOfPlayerAndTeamToMEN();
+						// 第一步应该先将信息写入内存中
+						oneMatch.writePlayerPerformToday();// 更新CACHE中的今日球员
+						oneMatch.writeTeamNormalInfoToCACHE();// 第二步更新球队的普通数据
+						oneMatch.writeTeamHighInfoToCACHE();// 第三步更新球队高级数据
+						oneMatch.writePlayerNormalInfoToCACHE();// 第四步更新球员普通数据
+						oneMatch.writePlayerHighInfoToCACHE();// 第五步更新球员高级数据//这一步一定是最后做，因为只有有了以上数据才能进行这一步
 					}
 				}
 				if (!watchKey.reset()) {
 					break;
+				}
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
 				}
 			}
 		} catch (IOException e) {

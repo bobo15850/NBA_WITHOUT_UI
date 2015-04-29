@@ -61,32 +61,5 @@ public class MyDate implements Comparable<MyDate> {
 		else {
 			return -1;
 		}
-
-		// int a = Integer.parseInt(String.valueOf(this.year) +
-		// String.valueOf(this.month) + String.valueOf(this.day));
-		// int b = Integer.parseInt(String.valueOf(o.year) +
-		// String.valueOf(o.month) + String.valueOf(o.day));
-		// if (a > b) {
-		// return -1;
-		// }
-		// else if (a < b) {
-		// return 1;
-		// }
-		// else {
-		// return 0;
-		// }
-		// 测试哪种方式更加高效
-
 	}
-
-	// public static void main(String arg[]) {
-	// MyDate d1 = new MyDate(13, 2, 3);
-	// MyDate d2 = new MyDate(13, 3, 5);
-	// long starTime = System.currentTimeMillis();
-	// for (int i = 0; i < 100000; i++) {
-	// System.out.println(d1.compareTo(d2));
-	// }
-	// long finishTime = System.currentTimeMillis();
-	// System.out.println(finishTime - starTime);
-	// }
 }

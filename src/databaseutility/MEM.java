@@ -5,26 +5,29 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
-import po.GeneralInfoOfPlayerPo;
-import po.PlayerPerformanceOfOneMatchPo;
-import po.TeamPerformanceOfOneMatchPo;
+import common.mydatastructure.GeneralInfoOfPlayer;
 import common.mydatastructure.MyDate;
+import common.mydatastructure.PlayerPerformOfOneMatch;
+import common.mydatastructure.TeamPerformOfOneMatch;
 import common.statics.League;
 import common.statics.NUMBER;
 import common.statics.PathOfFile;
 
 public class MEM {
-	public static Map<String, TreeMap<MyDate, PlayerPerformanceOfOneMatchPo>> PLAYERS_PERFORM = new HashMap<String, TreeMap<MyDate, PlayerPerformanceOfOneMatchPo>>();
+
+	public static HashMap<String, GeneralInfoOfPlayer> PLAYER_GENERALINFO = new HashMap<String, GeneralInfoOfPlayer>();
+	// 球员基本信息存储
+	public static HashMap<String, String> TEAM_LEAGUE = new HashMap<String, String>();
+	// 球队联盟信息存储
+	/*
+	 * 以上信息只要初始化，以下信息需要更新
+	 */
+	public static HashMap<String, TreeMap<MyDate, PlayerPerformOfOneMatch>> PLAYERS_PERFORM = new HashMap<String, TreeMap<MyDate, PlayerPerformOfOneMatch>>();
 	// 球员数据存储
-	public static Map<String, GeneralInfoOfPlayerPo> PLAYER_GENERALINFO = new HashMap<String, GeneralInfoOfPlayerPo>();
-	// 求援基本信息存储
-	public static Map<String, TreeMap<MyDate, TeamPerformanceOfOneMatchPo>> TEAM_PERFORM = new HashMap<String, TreeMap<MyDate, TeamPerformanceOfOneMatchPo>>();
+	public static HashMap<String, TreeMap<MyDate, TeamPerformOfOneMatch>> TEAM_PERFORM = new HashMap<String, TreeMap<MyDate, TeamPerformOfOneMatch>>();
 	// 球队数据存储
-	public static Map<String, String> TEAM_LEAGUE = new HashMap<String, String>();
-	// 球队基本信息存储
 	static {
 		MEM.handleFileOfMatches();
 		MEM.handleFileOfPlayers();
@@ -86,7 +89,7 @@ public class MEM {
 			}
 			playerReader.readLine();
 		}
-		GeneralInfoOfPlayerPo playerInfoPo = new GeneralInfoOfPlayerPo();
+		GeneralInfoOfPlayer playerInfoPo = new GeneralInfoOfPlayer();
 		playerInfoPo.setName(element[0]);
 		playerInfoPo.setPosition(element[2]);
 		playerInfoPo.setAge(toInt(element[6]));

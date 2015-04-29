@@ -1,7 +1,10 @@
 package start;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
+import businesslogic.players.PlayerAutoTest;
+import businesslogic.teams.TeamAutoTest;
 import test.data.PlayerHighInfo;
 import test.data.PlayerHotInfo;
 import test.data.PlayerKingInfo;
@@ -9,8 +12,6 @@ import test.data.PlayerNormalInfo;
 import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
 import test.data.TeamNormalInfo;
-import businesslogic.players.PlayerAutoTest;
-import businesslogic.teams.TeamAutoTest;
 import autoTestService.PlayerAutoTestService;
 import autoTestService.TeamAutoTestService;
 import common.mydatastructure.Filter;
@@ -48,7 +49,7 @@ public class Terminal {
 				this.playerAll();
 			}
 		}
-		else if (args[0].equals(Command.team)) {
+		else if (args[0].equals(Command.team)) {// 进入球队模块
 			if (length != 1) {
 				if (args[1].equals(Command.high)) {
 					this.teamHigh();
@@ -67,7 +68,7 @@ public class Terminal {
 	}
 
 	private void playerAll() {
-		PlayerNormalInfo resultArray[] = null;
+		ArrayList<PlayerNormalInfo> resultList;
 		String avg_or_tot = Command.average;
 		int number = 50;// 数目
 		Filter filter = new Filter();// 筛选器
@@ -103,33 +104,37 @@ public class Terminal {
 			}
 		}
 		if (avg_or_tot.equals(Command.total)) {
-			resultArray = this.playerBl.getPlayerNormal_tot(number, filter, this.toSortCells(sortCmd));
+			resultList = this.playerBl.getPlayerNormal_tot(number, filter, this.toSortCells(sortCmd));
 		}
 		else {
-			resultArray = this.playerBl.getPlayerNormal_avg(number, filter, this.toSortCells(sortCmd));
+			resultList = this.playerBl.getPlayerNormal_avg(number, filter, this.toSortCells(sortCmd));
 		}
-		this.addPrintStream(resultArray, number);
+		this.addPrintStream(resultList, number);
 		System.out.println(avg_or_tot + "--" + number + "--" + filter.toString() + "--" + sortCmd);
 	}
 
 	private void playerKing() {
-		PlayerKingInfo resultArray[] = null;
+		ArrayList<PlayerKingInfo> resultArray = null;
 		String field = commandArray[2];
+		int number = 5;
+		if (length != 4) {
+			number = this.toInt(commandArray[5]);
+		}
 		if (commandArray[3].equals(Command.season)) {
-			resultArray = this.playerBl.getPlayerKingOfSeason(field);
-			System.out.println(field + Command.season);
+			resultArray = this.playerBl.getPlayerKingOfSeason(number, field);
+			System.out.println(field + Command.season + "-" + number);
 			// 赛季field平均数据王
 		}
 		else if (commandArray[3].equals(Command.daily)) {
-			resultArray = this.playerBl.getPlayerKingOfDaily(field);
-			System.out.println(field + Command.daily);
+			resultArray = this.playerBl.getPlayerKingOfDaily(number, field);
+			System.out.println(field + Command.daily + "-" + number);
 			// 当日field平均数据王
 		}
 		this.addPrintStream(resultArray, 1);
 	}
 
 	private void playerHot() {
-		PlayerHotInfo resultArray[] = null;
+		ArrayList<PlayerHotInfo> resultArray = null;
 		int number = 5;
 		String field = commandArray[2];
 		if (length != 3) {
@@ -144,7 +149,7 @@ public class Terminal {
 	}
 
 	private void playerHigh() {
-		PlayerHighInfo resultArray[] = null;
+		ArrayList<PlayerHighInfo> resultArray = null;
 		int number = 50;
 		String sortCmd = Field.realShot + Command.dot + Command.descend;
 		if (length != 2) {
@@ -165,7 +170,7 @@ public class Terminal {
 	}
 
 	private void teamHigh() {
-		TeamHighInfo resultArray[] = null;
+		ArrayList<TeamHighInfo> resultArray = null;
 		int number = 30;
 		String sortCmd = Field.winRate + Command.dot + Command.descend;
 		if (length != 2) {
@@ -186,7 +191,7 @@ public class Terminal {
 	}
 
 	private void teamHot() {
-		TeamHotInfo resultArray[] = null;
+		ArrayList<TeamHotInfo> resultArray = null;
 		int number = 5;
 		String field = commandArray[2];
 		if (length != 3) {
@@ -201,7 +206,7 @@ public class Terminal {
 	}
 
 	private void teamAll() {
-		TeamNormalInfo resultArray[] = null;
+		ArrayList<TeamNormalInfo> resultArray = null;
 		String avg_or_tot = Command.average;
 		int number = 30;// 数目
 		String sortCmd = Field.score + Command.dot + Command.descend;// 排序命令
@@ -258,10 +263,10 @@ public class Terminal {
 		return sortcells;
 	}
 
-	private void addPrintStream(Object[] resultArray, int number) {
-		if (resultArray != null) {
+	private void addPrintStream(@SuppressWarnings("rawtypes") ArrayList resultList, int number) {
+		if (resultList != null) {
 			for (int i = 0; i < number; i++) {
-				this.outStream.print(resultArray[i]);
+				this.outStream.print(resultList.get(i));
 			}
 		}
 	}

@@ -1,6 +1,6 @@
-package po;
+package common.mydatastructure;
 
-public class GeneralInfoOfPlayerPo {
+public class GeneralInfoOfPlayer {
 	private String playerName;// 姓名
 	private String position;// 位置
 	private int age;// 年龄
@@ -28,8 +28,4 @@ public class GeneralInfoOfPlayerPo {
 	public int getAge() {
 		return this.age;
 	}// 得到球员年龄
-
-	public String toString() {
-		return "姓名：" + playerName + "---位置：" + position + "---年龄：" + age;
-	}
 }
