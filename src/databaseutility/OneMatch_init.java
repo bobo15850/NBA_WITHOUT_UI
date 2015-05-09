@@ -13,7 +13,6 @@ public class OneMatch_init extends OneMatch {
 	}
 
 	public void writeDetailInfoOfPlayerAndTeamToMEN() {
-		System.out.println(nameOfFile);
 		if (isDataCorrect) {
 			PlayerPerformOfOneMatch playerPo;
 			for (int i = 0; i < listOfFirstTeamPlayerPerformance.size(); i++) {

@@ -19,7 +19,6 @@ public class TeamNormalInfo_Expand extends TeamNormalInfo {
 
 	public TeamNormalInfo_Expand getTeamNormal_avg() {
 		TeamNormalInfo_Expand teamNormal_avg = new TeamNormalInfo_Expand();
-
 		int numOfGame = getNumOfGame();
 		System.out.println(numOfGame);
 		teamNormal_avg.setNumOfGame(numOfGame);

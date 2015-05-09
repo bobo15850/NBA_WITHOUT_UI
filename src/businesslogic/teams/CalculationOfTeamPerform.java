@@ -126,7 +126,7 @@ public class CalculationOfTeamPerform {
 
 	public static double cutTail(double number) {
 		BigDecimal bigDecimal = new BigDecimal(number);
-		double result = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+		double result = bigDecimal.setScale(8, BigDecimal.ROUND_HALF_UP).doubleValue();
 		return result;
-	}// 保留四位小数
+	}// 保留八位小数
 }

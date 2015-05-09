@@ -21,15 +21,6 @@ public class MySort {
 
 	}
 
-	public static boolean isDescend(String str) {
-		if (str.equals(Command.ascend)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public static BeanComparator getBeanComparator(SortCell sortCell) {
 		if (sortCell.getOrder().equals(Command.ascend)) {
 			if (sortCell.getField().equals(Field.GmSc)) {

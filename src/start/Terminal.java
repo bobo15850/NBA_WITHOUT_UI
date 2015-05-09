@@ -130,7 +130,7 @@ public class Terminal {
 			System.out.println(field + Command.daily + "-" + number);
 			// 当日field平均数据王
 		}
-		this.addPrintStream(resultArray, 1);
+		this.addPrintStream(resultArray, number);
 	}
 
 	private void playerHot() {
