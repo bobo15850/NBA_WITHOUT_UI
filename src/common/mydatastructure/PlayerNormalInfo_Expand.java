@@ -16,6 +16,21 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 	private double freeShot;// 罚球出手数
 	private int doubleTwo;// 两双数
 	private int tripleTwo;// 三双数
+	// 以下为本队球队数据
+	private double teamMinute = 0;// 球队所有球员上场时间
+	private double teamTotalRebound = 0;// 球队所有篮板数
+	private double teamOffendRebound = 0;
+	private double teamDefendRebound = 0;
+	private double teamTotalHit = 0; // 球队所有命中数
+	private double teamTotalshot = 0;// 球队所有出手数
+	private double teamFreeShot = 0;// 球队所有罚球数
+	private double teamFault = 0;// 球队所有失误数
+	// 以下为对手球队数据
+	private double oppTotalShot = 0;// 对手总出手数
+	private double oppThreeShot = 0;// 对手三分出手数
+	private double oppRebound = 0;// 对手所有篮板数
+	private double oppOffendRebound = 0;// 对手进攻篮板数
+	private double oppDefendRebound = 0;// 对手防守篮板数
 
 	public int getDoubleTwo() {
 		return doubleTwo;
@@ -73,12 +88,52 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 		this.freeHit = freeHit;
 	}
 
-	public double getFreehot() {
+	public double getFreeShot() {
 		return freeShot;
 	}
 
 	public void setFreeShot(double freehot) {
 		this.freeShot = freehot;
+	}
+
+	public double getOppTotalShot() {
+		return oppTotalShot;
+	}
+
+	public void setOppTotalShot(double oppTotalshot) {
+		this.oppTotalShot = oppTotalshot;
+	}
+
+	public double getOppThreeShot() {
+		return oppThreeShot;
+	}
+
+	public void setOppThreeShot(double oppThreeShot) {
+		this.oppThreeShot = oppThreeShot;
+	}
+
+	public double getOppRebound() {
+		return oppRebound;
+	}
+
+	public void setOppRebound(double oppRebound) {
+		this.oppRebound = oppRebound;
+	}
+
+	public double getOppOffendRebound() {
+		return oppOffendRebound;
+	}
+
+	public void setOppOffendRebound(double oppOffendRebound) {
+		this.oppOffendRebound = oppOffendRebound;
+	}
+
+	public double getOppDefendRebound() {
+		return oppDefendRebound;
+	}
+
+	public void setOppDefendRebound(double oppDefendRebound) {
+		this.oppDefendRebound = oppDefendRebound;
 	}
 
 	public PlayerNormalInfo_Expand getPlayerNormal_avg() {
@@ -89,7 +144,7 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 		playerNormal_avg.setBlockShot(CalculationOfPlayerPerform.cutTail(getBlockShot() / numOfGame));
 		playerNormal_avg.setDefend(CalculationOfPlayerPerform.cutTail(getDefend() / numOfGame));
 		playerNormal_avg.setDoubleTwo(doubleTwo);
-		playerNormal_avg.setEfficiency(getEfficiency());
+		playerNormal_avg.setEfficiency(getEfficiency() / numOfGame);
 		playerNormal_avg.setFault(CalculationOfPlayerPerform.cutTail(getFault() / numOfGame));
 		playerNormal_avg.setFoul(CalculationOfPlayerPerform.cutTail(getFoul() / numOfGame));
 		playerNormal_avg.setFreeHit(CalculationOfPlayerPerform.cutTail(freeHit / numOfGame));
@@ -106,19 +161,82 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 		playerNormal_avg.setSteal(CalculationOfPlayerPerform.cutTail(getSteal() / numOfGame));
 		playerNormal_avg.setTeamName(getTeamName());
 		playerNormal_avg.setThree(getThree());
+		//
 		playerNormal_avg.setThreeHit(CalculationOfPlayerPerform.cutTail(threeHit / numOfGame));
 		playerNormal_avg.setThreeShot(CalculationOfPlayerPerform.cutTail(threeShot / numOfGame));
 		playerNormal_avg.setTotalHit(CalculationOfPlayerPerform.cutTail(totalHit / numOfGame));
 		playerNormal_avg.setTotalShot(CalculationOfPlayerPerform.cutTail(totalShot / numOfGame));
 		playerNormal_avg.setTripleTwo(tripleTwo);
+		//
+		playerNormal_avg.setOppTotalShot(oppTotalShot / numOfGame);
+		playerNormal_avg.setOppThreeShot(oppThreeShot / numOfGame);
+		playerNormal_avg.setOppRebound(oppRebound / numOfGame);
+		playerNormal_avg.setOppOffendRebound(oppOffendRebound / numOfGame);
+		playerNormal_avg.setOppDefendRebound(oppDefendRebound / numOfGame);
 		return playerNormal_avg;
 	}
 
-	public String[] toStringArray() {
-		return new String[] { this.getTeamName(), String.valueOf(this.getNumOfGame()), String.valueOf(this.getMinute()),
-				String.valueOf(this.getEfficiency()), String.valueOf(this.getPoint()), String.valueOf(this.getShot()),
-				String.valueOf(this.getRebound()), String.valueOf(this.getAssist()), String.valueOf(this.getSteal()),
-				String.valueOf(this.getBlockShot()), String.valueOf(this.doubleTwo), String.valueOf(this.tripleTwo), String.valueOf(this.getFault()),
-				String.valueOf(this.getFoul()), String.valueOf(this.getThree()), String.valueOf(this.getPenalty()) };
+	public double getTeamMinute() {
+		return teamMinute;
+	}
+
+	public void setTeamMinute(double teamMinute) {
+		this.teamMinute = teamMinute;
+	}
+
+	public double getTeamTotalRebound() {
+		return teamTotalRebound;
+	}
+
+	public void setTeamTotalRebound(double teamTotalRebound) {
+		this.teamTotalRebound = teamTotalRebound;
+	}
+
+	public double getTeamOffendRebound() {
+		return teamOffendRebound;
+	}
+
+	public void setTeamOffendRebound(double teamOffendRebound) {
+		this.teamOffendRebound = teamOffendRebound;
+	}
+
+	public double getTeamDefendRebound() {
+		return teamDefendRebound;
+	}
+
+	public void setTeamDefendRebound(double teamDefendRebound) {
+		this.teamDefendRebound = teamDefendRebound;
+	}
+
+	public double getTeamTotalHit() {
+		return teamTotalHit;
+	}
+
+	public void setTeamTotalHit(double teamTotalHit) {
+		this.teamTotalHit = teamTotalHit;
+	}
+
+	public double getTeamTotalshot() {
+		return teamTotalshot;
+	}
+
+	public void setTeamTotalshot(double teamTotalshot) {
+		this.teamTotalshot = teamTotalshot;
+	}
+
+	public double getTeamFreeShot() {
+		return teamFreeShot;
+	}
+
+	public void setTeamFreeShot(double teamFreeShot) {
+		this.teamFreeShot = teamFreeShot;
+	}
+
+	public double getTeamFault() {
+		return teamFault;
+	}
+
+	public void setTeamFault(double teamFault) {
+		this.teamFault = teamFault;
 	}
 }

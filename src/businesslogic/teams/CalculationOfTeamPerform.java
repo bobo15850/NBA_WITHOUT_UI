@@ -1,11 +1,8 @@
 package businesslogic.teams;
 
-import java.math.BigDecimal;
-
-/*
- * 用以计算xx率
- */
 public class CalculationOfTeamPerform {
+	private final static double STD_NUM = 100;
+
 	public static double average(double num, int time) {
 		if (time == 0) {
 			return 0;
@@ -37,96 +34,80 @@ public class CalculationOfTeamPerform {
 		}
 	}// 计算胜率
 
-	public static double calOffensiveNum(double shoot, double foul, double offensiveRebound, double defensiveReboundOfCompetitor, double miss,
-			double turnover) {
-		double totalNumber = offensiveRebound + defensiveReboundOfCompetitor;
-		if (totalNumber == 0) {
+	public static double calOffendRound(double totalShot, double totalHit, double freeShot, double offendRebound, double oppDefendRebound, double fault) {
+		double total = offendRebound + oppDefendRebound;
+		if (total == 0) {
 			return 0;
 		}
 		else {
-			double result = 0;
-			result = shoot + 0.4 * foul - (1.07 * ((double) offensiveRebound / (double) (offensiveRebound + defensiveReboundOfCompetitor) * miss))
-					+ (1.07 * turnover);
+			double result = totalShot + 0.4 * freeShot + 1.07 * (fault - (totalShot - totalHit) * offendRebound / total);
 			return cutTail(result);
 		}
 	}// 计算进攻回合数
 
-	public static double calOffensiveEfficiency(double score, double shoot, double foul, double offensiveRebound,
-			double defensiveReboundOfCompetitor, double miss, double turnover) {
-		double offensiveNum = calOffensiveNum(shoot, foul, offensiveRebound, defensiveReboundOfCompetitor, miss, turnover);
-		if (offensiveNum == 0) {
+	public static double calOffendEfficient(double point, double offendNum) {
+		if (offendNum == 0) {
 			return 0;
 		}
 		else {
-			double result = 0;
-			result = (double) score * 100 / (double) offensiveNum;
+			double result = STD_NUM * point / offendNum;
 			return cutTail(result);
 		}
 	}// 计算进攻效率
 
-	public static double calDefensiveEfficiency(double scoreOfCompetitor, double shootOfCompetitor, double foulOfCompetitor,
-			double offensiveReboundOfCompetitor, double defensiveRebound, double missOfCompetitor, double turnoverOfCompetitor) {
-		double offensiveNum = calOffensiveNum(shootOfCompetitor, foulOfCompetitor, offensiveReboundOfCompetitor, defensiveRebound, missOfCompetitor,
-				turnoverOfCompetitor);
-		if (offensiveNum == 0) {
+	public static double calDeffendEfficient(double oppPoint, double defendNum) {
+		if (defendNum == 0) {
 			return 0;
 		}
 		else {
-			double result = (double) scoreOfCompetitor * 100 / (double) offensiveNum;
+			double result = STD_NUM * oppPoint / defendNum;
 			return cutTail(result);
 		}
 	}// 计算防守效率
 
-	public static double calOffensiveReboundEfficiency(double reboundBefore, double reboundBehindOfCompetitor) {
-		double total = reboundBefore + reboundBehindOfCompetitor;
+	public static double calOffendReboundEfficient(double offendRebound, double oppDefendRebound) {
+		double total = offendRebound + oppDefendRebound;
 		if (total == 0) {
 			return 0;
 		}
 		else {
-			double result = (double) reboundBefore / (double) total;
+			double result = offendRebound / total;
 			return cutTail(result);
 		}
 	}// 计算进攻篮板效率
 
-	public static double calDefensiveReboundEfficiency(double reboundBehind, double reboundBeforeOfCompetitor) {
-		double total = reboundBehind + reboundBeforeOfCompetitor;
+	public static double calDefendReboundEfficient(double defendRebound, double oppOffendRebound) {
+		double total = defendRebound + oppOffendRebound;
 		if (total == 0) {
 			return 0;
 		}
 		else {
-			double result = (double) reboundBehind / (double) total;
+			double result = defendRebound / oppOffendRebound;
 			return cutTail(result);
 		}
 	}// 计算防守篮板效率
 
-	public static double calStealEfficiency(double steal, double shootOfCompetitor, double foulOfCompetitor, double offensiveReboundOfCompetitor,
-			double defensiveRebound, double missOfCompetitor, double turnoverOfCompetitor) {
-		double OffensiveNum = calOffensiveNum(shootOfCompetitor, foulOfCompetitor, offensiveReboundOfCompetitor, defensiveRebound, missOfCompetitor,
-				turnoverOfCompetitor);
-		if (OffensiveNum == 0) {
+	public static double calStealEfficient(double steal, double oppOffendNum) {
+		if (oppOffendNum == 0) {
 			return 0;
 		}
 		else {
-			double result = (double) steal * 100 / (double) OffensiveNum;
+			double result = STD_NUM * steal / oppOffendNum;
 			return cutTail(result);
 		}
-	}// 计算抢断率
+	}// 抢断效率
 
-	public static double calAssistRate(double assist, double shoot, double foul, double offensiveRebound, double defensiveReboundOfCompetitor,
-			double miss, double turnover) {
-		double offensiveNum = calOffensiveNum(shoot, foul, offensiveRebound, defensiveReboundOfCompetitor, miss, turnover);
-		if (offensiveNum == 0) {
+	public static double calAssistEfficient(double assist, double offendNum) {
+		if (offendNum == 0) {
 			return 0;
 		}
 		else {
-			double result = (double) assist * 100 / (double) offensiveNum;
+			double result = STD_NUM * assist / offendNum;
 			return cutTail(result);
 		}
-	}// 计算助攻率
+	}// 助攻效率
 
 	public static double cutTail(double number) {
-		BigDecimal bigDecimal = new BigDecimal(number);
-		double result = bigDecimal.setScale(8, BigDecimal.ROUND_HALF_UP).doubleValue();
-		return result;
+		return number;
 	}// 保留八位小数
 }

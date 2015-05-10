@@ -35,10 +35,11 @@ public class CACHE {
 		initPlayerTodayCache();
 		initTeamCache();
 	}
+
 	public static void initPlayerCache() {
 		for (Entry<String, TreeMap<MyDate, PlayerPerformOfOneMatch>> temp : MEM.PLAYERS_PERFORM.entrySet()) {
-			PlayerNormalInfo_Expand playerNormal = new PlayerNormalInfo_Expand();
-			PlayerHighInfo playerHigh = new PlayerHighInfo();
+			PlayerNormalInfo_Expand playerN = new PlayerNormalInfo_Expand();
+			PlayerHighInfo playerH = new PlayerHighInfo();
 			//
 			String playerName = temp.getKey();// 球员姓名
 			String position = Position.UNKUOWN_POSITION;// 位置
@@ -58,86 +59,85 @@ public class CACHE {
 			}// 得到年龄
 			int numOfGame = oneplayer.size();// 比赛场数
 			int start = 0;
-			int totalHitNumber = 0;// 总命中数
-			int totalShotNumber = 0;// 总出手数
-			int threePointHitNumber = 0;// 三分命中数
-			int threePointShotNumber = 0;// 三分出手数
-			int freePointHitNumber = 0;// 罚球命中数
-			int freePointShotNumber = 0;// 罚球出手数
+			int totalHit = 0;// 总命中数
+			int totalShot = 0;// 总出手数
+			int threeHit = 0;// 三分命中数
+			int threeShot = 0;// 三分出手数
+			int freeHit = 0;// 罚球命中数
+			int freeShot = 0;// 罚球出手数
 			int doubleTwo = 0;// 两双次数
 			int tripleTwo = 0;// 三双次数
 			//
 			int point = 0;// 总得分数
-			int totalReboundNumber = 0;// 总篮板
-			int offendReboundNumber = 0;// 进攻篮板数
-			int defendReboundNumber = 0;// 防守篮板数
-			int assistNumber = 0;// 总助攻
-			double playingTime = 0;// 总上场时间
-			int stealNumber = 0;// 总抢断数
-			int blockShotNumber = 0;// 总 盖帽数
-			int faultNumber = 0;// 总失误数
-			int foulNumber = 0;// 总犯规数
+			int totalRebound = 0;// 总篮板
+			int offendRebound = 0;// 进攻篮板数
+			int defendRebound = 0;// 防守篮板数
+			int assist = 0;// 总助攻
+			double minute = 0;// 总上场时间
+			int steal = 0;// 总抢断数
+			int blockShot = 0;// 总 盖帽数
+			int fault = 0;// 总失误数
+			int foul = 0;// 总犯规数
 			//
-			double timeOfAllPlayer = 0;// 球队所有球员上场时间
-			int totalReboundOfTeam = 0;// 球队所有篮板数
-			int offendReboundOfTeam = 0;
-			int defendReboundOfTeam = 0;
+			double teamMinute = 0;// 球队所有球员上场时间
+			int teamTotalRebound = 0;// 球队所有篮板数
+			int teamOffendRebound = 0;
+			int teamDefendRebound = 0;
 
-			int hitOfAllPlayer = 0; // 球队所有命中数
-			int shootOfAllPlayer = 0;// 球队所有出手数
-			int freePointShotOfAllPlayer = 0;// 球队所有罚球数
-			int faultOfAllPlayer = 0;// 球队所有失误数
+			int teamTotalHit = 0; // 球队所有命中数
+			int teamTotalshot = 0;// 球队所有出手数
+			int teamFreeShot = 0;// 球队所有罚球数
+			int teamFault = 0;// 球队所有失误数
 			//
-			int offendNumberOfCompetitor = 0;// 对手进攻次数
-			int shootNumOfCompetitor = 0;// 对手总出手数
-			int threePointShootOfCompetitor = 0;// 对手三分出手数
-			int totalReboundOfCompetitor = 0;// 对手所有篮板数
-			int offendReboundOfCompetior = 0;// 对手进攻篮板数
-			int defendReboundOfCompetitor = 0;// 对手防守篮板数
+			int oppOffendRound = 0;// 对手进攻次数
+			int oppTotalShot = 0;// 对手总出手数
+			int oppThreeShot = 0;// 对手三分出手数
+			int oppTotalRebound = 0;// 对手所有篮板数
+			int oppOffendRebound = 0;// 对手进攻篮板数
+			int oppDefendRebound = 0;// 对手防守篮板数
 			//
 			for (Entry<MyDate, PlayerPerformOfOneMatch> onematch : oneplayer.entrySet()) {
 				PlayerPerformOfOneMatch tempMatch = onematch.getValue();
 				MyDate tempDate = onematch.getKey();
 				//
 				start += tempMatch.getStart();
-				totalHitNumber += tempMatch.getTotalHit();
-				totalShotNumber += tempMatch.getTotalShoot();
-				threePointHitNumber += tempMatch.getThreeHit();
-				threePointShotNumber += tempMatch.getThreeShot();
-				freePointHitNumber += tempMatch.getFreeHit();
-				freePointShotNumber += tempMatch.getFreeShot();
-				totalReboundNumber += tempMatch.getRebound();
-				assistNumber += tempMatch.getAssist();
-				playingTime += tempMatch.getMinute();
-				stealNumber += tempMatch.getSteal();
-				blockShotNumber += tempMatch.getBlockShot();
-				faultNumber += tempMatch.getFault();
-				foulNumber += tempMatch.getFoul();
+				totalHit += tempMatch.getTotalHit();
+				totalShot += tempMatch.getTotalShoot();
+				threeHit += tempMatch.getThreeHit();
+				threeShot += tempMatch.getThreeShot();
+				freeHit += tempMatch.getFreeHit();
+				freeShot += tempMatch.getFreeShot();
+				totalRebound += tempMatch.getRebound();
+				assist += tempMatch.getAssist();
+				minute += tempMatch.getMinute();
+				steal += tempMatch.getSteal();
+				blockShot += tempMatch.getBlockShot();
+				fault += tempMatch.getFault();
+				foul += tempMatch.getFoul();
 				point += tempMatch.getPoint();
-				offendReboundNumber += tempMatch.getOffendRebound();
-				defendReboundNumber += tempMatch.getDefendRebound();
+				offendRebound += tempMatch.getOffendRebound();
+				defendRebound += tempMatch.getDefendRebound();
 				//
 				String tempTeam = tempMatch.getTeamName();// 球队名称
 				TeamPerformOfOneMatch selfTeam = MEM.TEAM_PERFORM.get(tempTeam).get(tempDate);// 所属球队战绩
-				TeamPerformOfOneMatch opponentTeam = MEM.TEAM_PERFORM.get(selfTeam.getOpponentTeamName()).get(tempDate);// 对手球队战绩
+				TeamPerformOfOneMatch oppTeam = MEM.TEAM_PERFORM.get(selfTeam.getOpponentTeamName()).get(tempDate);// 对手球队战绩
 				//
-				timeOfAllPlayer += selfTeam.getMinute();
-				totalReboundOfTeam += selfTeam.getRebound();
-				offendReboundOfTeam += selfTeam.getOffendRebound();
-				defendReboundOfTeam += selfTeam.getDefendRebound();
-				shootOfAllPlayer += selfTeam.getTotalShot();
-				freePointShotOfAllPlayer += selfTeam.getFreeShot();
-				faultOfAllPlayer += selfTeam.getFault();
-				hitOfAllPlayer += selfTeam.getTotalHit();
+				teamMinute += selfTeam.getMinute();
+				teamTotalRebound += selfTeam.getRebound();
+				teamOffendRebound += selfTeam.getOffendRebound();
+				teamDefendRebound += selfTeam.getDefendRebound();
+				teamTotalshot += selfTeam.getTotalShot();
+				teamFreeShot += selfTeam.getFreeShot();
+				teamFault += selfTeam.getFault();
+				teamTotalHit += selfTeam.getTotalHit();
 				//
-				totalReboundOfCompetitor += opponentTeam.getRebound();
-				offendReboundOfCompetior += opponentTeam.getOffendRebound();
-				defendReboundOfCompetitor += opponentTeam.getDefendRebound();
-				offendNumberOfCompetitor += CalculationOfTeamPerform.calOffensiveNum(selfTeam.getTotalShot(), selfTeam.getFoul(),
-						selfTeam.getOffendRebound(), opponentTeam.getDefendRebound(), selfTeam.getTotalShot() - selfTeam.getTotalHit(),
-						selfTeam.getFault());
-				shootNumOfCompetitor += opponentTeam.getTotalShot();
-				threePointShootOfCompetitor += opponentTeam.getThreeShot();
+				oppOffendRound += CalculationOfTeamPerform.calOffendRound(oppTeam.getTotalShot(), oppTeam.getTotalHit(), oppTeam.getFreeShot(), oppTeam.getOffendRebound(),
+						selfTeam.getDefendRebound(), oppTeam.getFault());// 对手进攻回合数（防守回合数）
+				oppTotalRebound += oppTeam.getRebound();
+				oppOffendRebound += oppTeam.getOffendRebound();
+				oppDefendRebound += oppTeam.getDefendRebound();
+				oppTotalShot += oppTeam.getTotalShot();
+				oppThreeShot += oppTeam.getThreeShot();
 				int doubleOfOneMatch = 0;// 一场比赛中上双的个数
 				if (tempMatch.getPoint() >= 9.9) {
 					doubleOfOneMatch++;
@@ -161,65 +161,68 @@ public class CACHE {
 					tripleTwo++;
 				}
 			}
-			playerNormal.setName(playerName);
-			playerNormal.setAge(age);
-			playerNormal.setTeamName(teamName);
-			playerNormal.setStart(start);
-			playerNormal.setNumOfGame(numOfGame);
-			playerNormal.setPoint(point);
-			playerNormal.setRebound(totalReboundNumber);
-			playerNormal.setOffend(offendReboundNumber);
-			playerNormal.setDefend(defendReboundNumber);
-			playerNormal.setAssist(assistNumber);
-			playerNormal.setSteal(stealNumber);
-			playerNormal.setBlockShot(blockShotNumber);
-			playerNormal.setFoul(foulNumber);
-			playerNormal.setFault(faultNumber);
-			playerNormal.setMinute(CalculationOfPlayerPerform.cutTail(playingTime));
-			playerNormal.setTotalHit(totalHitNumber);
-			playerNormal.setTotalShot(totalShotNumber);
-			playerNormal.setThreeHit(threePointHitNumber);
-			playerNormal.setThreeShot(threePointShotNumber);
-			playerNormal.setFreeHit(freePointHitNumber);
-			playerNormal.setFreeShot(freePointShotNumber);
-			playerNormal.setDoubleTwo(doubleTwo);
-			playerNormal.setTripleTwo(tripleTwo);
-			playerNormal.setShot(CalculationOfPlayerPerform.calHitRate(totalHitNumber, totalShotNumber));
-			playerNormal.setThree(CalculationOfPlayerPerform.calHitRate(threePointHitNumber, threePointShotNumber));
-			playerNormal.setPenalty(CalculationOfPlayerPerform.calHitRate(freePointHitNumber, freePointShotNumber));
-			playerNormal.setEfficiency(CalculationOfPlayerPerform.calEfficiency(point, totalReboundNumber, assistNumber, stealNumber,
-					blockShotNumber, totalShotNumber, totalHitNumber, freePointShotNumber, freePointHitNumber, faultNumber, numOfGame));
+			playerN.setName(playerName);
+			playerN.setAge(age);
+			playerN.setTeamName(teamName);
+			playerN.setStart(start);
+			playerN.setNumOfGame(numOfGame);
+			playerN.setPoint(point);
+			playerN.setRebound(totalRebound);
+			playerN.setOffend(offendRebound);
+			playerN.setDefend(defendRebound);
+			playerN.setAssist(assist);
+			playerN.setSteal(steal);
+			playerN.setBlockShot(blockShot);
+			playerN.setFoul(foul);
+			playerN.setFault(fault);
+			playerN.setMinute(CalculationOfPlayerPerform.cutTail(minute));
 			//
-			playerHigh.setName(playerName);
-			playerHigh.setTeamName(teamName);
-			playerHigh.setLeague(league);
-			playerHigh.setPosition(position);
-			playerHigh.setGmSc(CalculationOfPlayerPerform.calGmSc(point, totalHitNumber, totalShotNumber, freePointShotNumber, freePointHitNumber,
-					offendReboundNumber, defendReboundNumber, stealNumber, assistNumber, blockShotNumber, foulNumber, faultNumber, numOfGame));
-			playerHigh.setShotEfficient(CalculationOfPlayerPerform.calShotEfficiency(totalHitNumber, threePointHitNumber, totalShotNumber));
-			playerHigh.setRealShot(CalculationOfPlayerPerform.calRealShot(point, totalShotNumber, freePointShotNumber));
+			playerN.setTotalHit(totalHit);
+			playerN.setTotalShot(totalShot);
+			playerN.setThreeHit(threeHit);
+			playerN.setThreeShot(threeShot);
+			playerN.setFreeHit(freeHit);
+			playerN.setFreeShot(freeShot);
+			playerN.setDoubleTwo(doubleTwo);
+			playerN.setTripleTwo(tripleTwo);
 			//
-			playerHigh.setOffendReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(offendReboundNumber, timeOfAllPlayer, playingTime,
-					offendReboundOfTeam, defendReboundOfCompetitor));
-			playerHigh.setDefendReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(defendReboundNumber, timeOfAllPlayer, playingTime,
-					defendReboundOfTeam, offendReboundOfCompetior));
-			//
-			playerHigh.setReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(totalReboundNumber, timeOfAllPlayer, playingTime,
-					totalReboundOfTeam, totalReboundOfCompetitor));
-			playerHigh.setAssistEfficient(CalculationOfPlayerPerform.calAssistEfficient(assistNumber, playingTime, timeOfAllPlayer, hitOfAllPlayer,
-					totalHitNumber));
-			playerHigh.setStealEfficient(CalculationOfPlayerPerform.calStealEfficient(stealNumber, timeOfAllPlayer, playingTime,
-					offendNumberOfCompetitor));
-			playerHigh.setBlockShotEfficient(CalculationOfPlayerPerform.calBlockShotEfficient(blockShotNumber, timeOfAllPlayer, playingTime,
-					shootNumOfCompetitor - threePointShootOfCompetitor));
-			// /////////////////////////////////////////////////////////////////////////////
-			playerHigh.setFaultEfficient(CalculationOfPlayerPerform.calFaultEfficient(faultNumber, totalShotNumber - threePointShotNumber,
-					freePointShotNumber));
-			// /////////////////////////////////////////////////////////////////////////////
-			playerHigh.setFrequency(CalculationOfPlayerPerform.calFrequency(totalShotNumber, freePointShotNumber, faultNumber, timeOfAllPlayer,
-					playingTime, shootOfAllPlayer, freePointShotOfAllPlayer, faultOfAllPlayer));
-			CACHE.PLAYER_NORMAL.put(playerName, playerNormal);
-			CACHE.PLAYER_HIGH.put(playerName, playerHigh);
+			playerN.setShot(CalculationOfPlayerPerform.calHitRate(totalHit, totalShot));
+			playerN.setThree(CalculationOfPlayerPerform.calHitRate(threeHit, threeShot));
+			playerN.setPenalty(CalculationOfPlayerPerform.calHitRate(freeHit, freeShot));
+			playerN.setEfficiency(CalculationOfPlayerPerform.calEfficiency(point, totalRebound, assist, steal, blockShot, totalShot, totalHit, freeShot, freeHit, fault));
+			// 以下为所在球队比赛数据
+			playerN.setTeamDefendRebound(teamDefendRebound);
+			playerN.setTeamFault(teamFault);
+			playerN.setTeamFreeShot(teamFreeShot);
+			playerN.setTeamMinute(teamMinute);
+			playerN.setTeamOffendRebound(teamOffendRebound);
+			playerN.setTeamTotalHit(teamTotalHit);
+			playerN.setTeamTotalRebound(teamTotalRebound);
+			playerN.setTeamTotalshot(teamTotalshot);
+			// 以下为对手数据
+			playerN.setOppTotalShot(oppTotalShot);
+			playerN.setOppThreeShot(oppThreeShot);
+			playerN.setOppRebound(oppTotalRebound);
+			playerN.setOppOffendRebound(oppOffendRebound);
+			playerN.setOppDefendRebound(oppDefendRebound);
+			// 以下为球员高阶数据
+			playerH.setName(playerName);
+			playerH.setTeamName(teamName);
+			playerH.setLeague(league);
+			playerH.setPosition(position);
+			playerH.setGmSc(CalculationOfPlayerPerform.calGmSc(point, totalHit, totalShot, freeShot, freeHit, offendRebound, defendRebound, steal, assist, blockShot, foul, fault, numOfGame));
+			playerH.setShotEfficient(CalculationOfPlayerPerform.calShotEfficiency(totalHit, threeHit, totalShot));
+			playerH.setRealShot(CalculationOfPlayerPerform.calRealShot(point, totalShot, freeShot));
+			playerH.setOffendReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(offendRebound, teamMinute, minute, teamOffendRebound, oppDefendRebound));
+			playerH.setDefendReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(defendRebound, teamMinute, minute, teamDefendRebound, oppOffendRebound));
+			playerH.setReboundEfficient(CalculationOfPlayerPerform.calReboundEfficient(totalRebound, teamMinute, minute, teamTotalRebound, oppTotalRebound));
+			playerH.setAssistEfficient(CalculationOfPlayerPerform.calAssistEfficient(assist, minute, teamMinute, teamTotalHit, totalHit));
+			playerH.setStealEfficient(CalculationOfPlayerPerform.calStealEfficient(steal, teamMinute, minute, oppOffendRound));
+			playerH.setBlockShotEfficient(CalculationOfPlayerPerform.calBlockShotEfficient(blockShot, teamMinute, minute, oppTotalShot - oppThreeShot));
+			playerH.setFaultEfficient(CalculationOfPlayerPerform.calFaultEfficient(fault, totalShot - threeShot, freeShot));
+			playerH.setFrequency(CalculationOfPlayerPerform.calFrequency(totalShot, freeShot, fault, teamMinute, minute, teamTotalshot, teamFreeShot, teamFault));
+			CACHE.PLAYER_NORMAL.put(playerName, playerN);
+			CACHE.PLAYER_HIGH.put(playerName, playerH);
 		}
 	}
 
@@ -232,112 +235,119 @@ public class CACHE {
 			}
 		}
 	}
+
 	public static void initTeamCache() {
 		for (Entry<String, TreeMap<MyDate, TeamPerformOfOneMatch>> temp : MEM.TEAM_PERFORM.entrySet()) {
-			TeamNormalInfo_Expand teamNormal = new TeamNormalInfo_Expand();
-			TeamHighInfo teamHigh = new TeamHighInfo();
+			TeamNormalInfo_Expand teamN = new TeamNormalInfo_Expand();
+			TeamHighInfo teamH = new TeamHighInfo();
 			TreeMap<MyDate, TeamPerformOfOneMatch> oneTeam = temp.getValue();
 			String teamName = temp.getKey();
 			int numOfGame = oneTeam.size();
 			int numOfWin = 0;
 			//
 			double minute = 0;
-			int totalHitNumber = 0;// 总命中数
-			int totalShotNumber = 0;// 总出手数
-			int threePointHitNumber = 0;// 三分命中数
-			int threePointShotNumber = 0;// 三分出手数
-			int freePointHitNumber = 0;// 罚球命中数
-			int freePointShootNumber = 0;// 罚球出手数
+			int totalHit = 0;// 总命中数
+			int totalShot = 0;// 总出手数
+			int threeHit = 0;// 三分命中数
+			int threeShot = 0;// 三分出手数
+			int freeHit = 0;// 罚球命中数
+			int freeShot = 0;// 罚球出手数
 			//
 			int point = 0;// 总得分数
-			int totalReboundNumber = 0;// 总篮板
-			int offendReboundNumber = 0;// 进攻篮板数
-			int defendReboundNumber = 0;// 防守篮板数
-			int assistNumber = 0;// 总助攻
-			int stealNumber = 0;// 总抢断数
-			int blockShotNumber = 0;// 总 盖帽数
-			int faultNumber = 0;// 总失误数
-			int foulNumber = 0;// 总犯规数
+			int totalRebound = 0;// 总篮板
+			int offendRebound = 0;// 进攻篮板数
+			int defendRebound = 0;// 防守篮板数
+			int assist = 0;// 总助攻
+			int steal = 0;// 总抢断数
+			int blockShot = 0;// 总 盖帽数
+			int fault = 0;// 总失误数
+			int foul = 0;// 总犯规数
 			//
-			int offendReboundOfCompetitor = 0;
-			int defendReboundOfCompetitor = 0;
-			int pointOfCompetitor = 0;
-			int shotOfCompetitor = 0;
-			int hitOfCompetitor = 0;
-			int foulOfCompetitor = 0;
-			int faultOfCompetitor = 0;
+			int oppOffendRebound = 0;
+			int oppDefendRebound = 0;
+			int oppPoint = 0;
+			int oppTotalShot = 0;
+			int oppTotalHit = 0;
+			int oppFreeShot = 0;
+			int oppFault = 0;
 			//
 			for (Entry<MyDate, TeamPerformOfOneMatch> oneMatch : oneTeam.entrySet()) {
 				TeamPerformOfOneMatch tempMatch = oneMatch.getValue();
 				MyDate tempDate = oneMatch.getKey();
 				numOfWin += tempMatch.getWin();
 				minute += tempMatch.getMinute();
-				totalHitNumber += tempMatch.getTotalHit();// 总命中数
-				totalShotNumber += tempMatch.getTotalShot();// 总出手数
-				threePointHitNumber += tempMatch.getThreeHit();// 三分命中数
-				threePointShotNumber += tempMatch.getThreeShot();// 三分出手数
-				freePointHitNumber += tempMatch.getFreeHit();// 罚球命中数
-				freePointShootNumber += tempMatch.getFreeShot();// 罚球出手数
+				totalHit += tempMatch.getTotalHit();// 总命中数
+				totalShot += tempMatch.getTotalShot();// 总出手数
+				threeHit += tempMatch.getThreeHit();// 三分命中数
+				threeShot += tempMatch.getThreeShot();// 三分出手数
+				freeHit += tempMatch.getFreeHit();// 罚球命中数
+				freeShot += tempMatch.getFreeShot();// 罚球出手数
 				//
 				point += tempMatch.getPoint();// 总得分数
-				totalReboundNumber += tempMatch.getRebound();// 总篮板
-				offendReboundNumber += tempMatch.getOffendRebound();// 进攻篮板数
-				defendReboundNumber += tempMatch.getDefendRebound();// 防守篮板数
-				assistNumber += tempMatch.getAssist();// 总助攻
-				stealNumber += tempMatch.getSteal();// 总抢断数
-				blockShotNumber += tempMatch.getBlock();// 总 盖帽数
-				faultNumber += tempMatch.getFault();// 总失误数
-				foulNumber += tempMatch.getFoul();// 总犯规数
+				totalRebound += tempMatch.getRebound();// 总篮板
+				offendRebound += tempMatch.getOffendRebound();// 进攻篮板数
+				defendRebound += tempMatch.getDefendRebound();// 防守篮板数
+				assist += tempMatch.getAssist();// 总助攻
+				steal += tempMatch.getSteal();// 总抢断数
+				blockShot += tempMatch.getBlock();// 总 盖帽数
+				fault += tempMatch.getFault();// 总失误数
+				foul += tempMatch.getFoul();// 总犯规数
 				//
 				TeamPerformOfOneMatch opponentTeam = MEM.TEAM_PERFORM.get(tempMatch.getOpponentTeamName()).get(tempDate);
-				offendReboundOfCompetitor += opponentTeam.getOffendRebound();
-				defendReboundOfCompetitor += opponentTeam.getDefendRebound();
-				pointOfCompetitor += opponentTeam.getPoint();
-				shotOfCompetitor += opponentTeam.getTotalShot();
-				hitOfCompetitor += opponentTeam.getTotalHit();
-				foulOfCompetitor += opponentTeam.getFoul();
-				faultOfCompetitor += opponentTeam.getFault();
+				oppOffendRebound += opponentTeam.getOffendRebound();
+				oppDefendRebound += opponentTeam.getDefendRebound();
+				oppPoint += opponentTeam.getPoint();
+				oppTotalShot += opponentTeam.getTotalShot();
+				oppTotalHit += opponentTeam.getTotalHit();
+				oppFreeShot += opponentTeam.getFreeShot();
+				oppFault += opponentTeam.getFault();
 			}
-			teamNormal.setTeamName(teamName);
-			teamNormal.setNumOfGame(numOfGame);
-			teamNormal.setNumOfWin(numOfWin);
-			teamNormal.setMinute(minute);
-			teamNormal.setPoint(point);
-			teamNormal.setRebound(totalReboundNumber);
-			teamNormal.setOffendRebound(offendReboundNumber);
-			teamNormal.setDefendRebound(defendReboundNumber);
-			teamNormal.setAssist(assistNumber);
-			teamNormal.setSteal(stealNumber);
-			teamNormal.setBlockShot(blockShotNumber);
-			teamNormal.setFault(faultNumber);
-			teamNormal.setFoul(foulNumber);
-			teamNormal.setTotalHit(totalHitNumber);
-			teamNormal.setTotalShot(totalShotNumber);
-			teamNormal.setThreeHit(threePointHitNumber);
-			teamNormal.setThreeShot(threePointShotNumber);
-			teamNormal.setFreeHit(freePointHitNumber);
-			teamNormal.setFreeShot(freePointShootNumber);
-			teamNormal.setShot(CalculationOfTeamPerform.calHitRate(totalHitNumber, totalShotNumber));
-			teamNormal.setThree(CalculationOfTeamPerform.calHitRate(threePointHitNumber, threePointShotNumber));
-			teamNormal.setPenalty(CalculationOfTeamPerform.calHitRate(freePointHitNumber, freePointShootNumber));
-
+			teamN.setTeamName(teamName);
+			teamN.setNumOfGame(numOfGame);
+			teamN.setPoint(point);
+			teamN.setRebound(totalRebound);
+			teamN.setOffendRebound(offendRebound);
+			teamN.setDefendRebound(defendRebound);
+			teamN.setAssist(assist);
+			teamN.setSteal(steal);
+			teamN.setBlockShot(blockShot);
+			teamN.setFault(fault);
+			teamN.setFoul(foul);
 			//
-			teamHigh.setTeamName(teamName);
-			teamHigh.setWinRate(CalculationOfTeamPerform.calWinRate(numOfWin, numOfGame));
-			teamHigh.setOffendRound(CalculationOfTeamPerform.calOffensiveNum(totalShotNumber, foulNumber, offendReboundNumber,
-					defendReboundOfCompetitor, totalShotNumber - totalHitNumber, faultNumber));
-			teamHigh.setOffendEfficient(CalculationOfTeamPerform.calOffensiveEfficiency(point, totalShotNumber, foulNumber, offendReboundNumber,
-					defendReboundOfCompetitor, totalShotNumber - totalHitNumber, faultNumber));
-			teamHigh.setDefendEfficient(CalculationOfTeamPerform.calDefensiveEfficiency(pointOfCompetitor, shotOfCompetitor, foulOfCompetitor,
-					offendReboundOfCompetitor, defendReboundNumber, shotOfCompetitor - hitOfCompetitor, faultOfCompetitor));
-			teamHigh.setOffendReboundEfficient(CalculationOfTeamPerform.calOffensiveReboundEfficiency(offendReboundNumber, defendReboundOfCompetitor));
-			teamHigh.setDefendReboundEfficient(CalculationOfTeamPerform.calDefensiveReboundEfficiency(defendReboundNumber, offendReboundOfCompetitor));
-			teamHigh.setAssistEfficient(CalculationOfTeamPerform.calAssistRate(assistNumber, totalShotNumber, foulNumber, offendReboundNumber,
-					defendReboundOfCompetitor, totalShotNumber - totalHitNumber, faultNumber));
-			teamHigh.setStealEfficient(CalculationOfTeamPerform.calStealEfficiency(stealNumber, shotOfCompetitor, foulOfCompetitor,
-					offendReboundOfCompetitor, defendReboundNumber, shotOfCompetitor - hitOfCompetitor, faultOfCompetitor));
-			CACHE.TEAM_NORMAL.put(teamName, teamNormal);
-			CACHE.TEAM_HIGH.put(teamName, teamHigh);
+			teamN.setTotalHit(totalHit);
+			teamN.setTotalShot(totalShot);
+			teamN.setThreeHit(threeHit);
+			teamN.setThreeShot(threeShot);
+			teamN.setFreeHit(freeHit);
+			teamN.setFreeShot(freeShot);
+			teamN.setNumOfWin(numOfWin);
+			teamN.setMinute(minute);
+			//
+			teamN.setShot(CalculationOfTeamPerform.calHitRate(totalHit, totalShot));
+			teamN.setThree(CalculationOfTeamPerform.calHitRate(threeHit, threeShot));
+			teamN.setPenalty(CalculationOfTeamPerform.calHitRate(freeHit, freeShot));
+			// 以下为对手数据
+			teamN.setOppDefendRebound(oppDefendRebound);
+			teamN.setOppFault(oppFault);
+			teamN.setOppOffendRebound(oppOffendRebound);
+			teamN.setOppPoint(oppPoint);
+			teamN.setOppTotalHit(oppTotalHit);
+			teamN.setOppTotalShot(oppTotalShot);
+			teamN.setOppFreeShot(oppFreeShot);
+			// 以下为球队高阶比赛数据
+			teamH.setTeamName(teamName);
+			double offendRound = CalculationOfTeamPerform.calOffendRound(totalShot, totalHit, freeShot, offendRebound, oppDefendRebound, fault);// 进攻回合数
+			double oppOffendRound = CalculationOfTeamPerform.calOffendRound(oppTotalShot, oppTotalHit, oppFreeShot, oppOffendRebound, defendRebound, oppFault);// 防守回合数（对手进攻回合数）
+			teamH.setWinRate(CalculationOfTeamPerform.calWinRate(numOfWin, numOfGame));// 胜率
+			teamH.setOffendRound(offendRound);// 进攻回合数
+			teamH.setOffendEfficient(CalculationOfTeamPerform.calOffendEfficient(point, offendRound));// 进攻效率
+			teamH.setDefendEfficient(CalculationOfTeamPerform.calDeffendEfficient(oppPoint, oppOffendRound));// 防守效率
+			teamH.setOffendReboundEfficient(CalculationOfTeamPerform.calOffendReboundEfficient(offendRebound, oppDefendRebound));// 进攻篮板效率
+			teamH.setDefendReboundEfficient(CalculationOfTeamPerform.calDefendReboundEfficient(defendRebound, oppOffendRebound));// 防守篮板效率
+			teamH.setAssistEfficient(CalculationOfTeamPerform.calAssistEfficient(assist, offendRound));// 助攻率
+			teamH.setStealEfficient(CalculationOfTeamPerform.calStealEfficient(steal, oppOffendRound));// 抢断率
+			CACHE.TEAM_NORMAL.put(teamName, teamN);
+			CACHE.TEAM_HIGH.put(teamName, teamH);
 		}
 	}
 }

@@ -44,10 +44,8 @@ public class Refresh extends Thread {
 								oneMatch.writeDetailInfoOfPlayerAndTeamToMEN();
 								// 第一步应该先将信息写入内存中
 								oneMatch.writePlayerPerformToday();// 更新CACHE中的今日球员
-								oneMatch.writeTeamNormalInfoToCACHE();// 第二步更新球队的普通数据
-								oneMatch.writeTeamHighInfoToCACHE();// 第三步更新球队高级数据
-								oneMatch.writePlayerNormalInfoToCACHE();// 第四步更新球员普通数据
-								oneMatch.writePlayerHighInfoToCACHE();// 第五步更新球员高级数据//这一步一定是最后做，因为只有有了以上数据才能进行这一步
+								oneMatch.writeTeamInfoToCACHE();// 第二步更新球队的普通数据
+								oneMatch.writePlayerInfoToCACHE();// 第四步更新球员普通数据
 							}
 						}
 					}
