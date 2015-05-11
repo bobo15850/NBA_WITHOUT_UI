@@ -1,8 +1,8 @@
 package common.statics;
 
 public class Field {
+	public static final String score="score";
 	public static final String point = "point";
-	public static final String score = "score";
 	public static final String rebound = "rebound";
 	public static final String assist = "assist";
 	public static final String blockShot = "blockShot";
@@ -15,6 +15,7 @@ public class Field {
 	public static final String three = "three";
 	public static final String penalty = "penalty";
 	public static final String doubleTwo = "doubleTwo";
+	public static final String numOfGame = "numOfGame";
 	//
 	public static final String realShot = "realShot";
 	public static final String GmSc = "GmSc";
@@ -35,4 +36,5 @@ public class Field {
 	public static final String offendRound = "offendRound";
 	public static final String offendEfficient = "offendEfficient";
 	public static final String defendEfficient = "defendEfficient";
+	
 }

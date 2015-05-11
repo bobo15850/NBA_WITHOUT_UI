@@ -29,4 +29,7 @@ public class Command {
 	public static final String position = "position";
 	public static final String league = "league";
 	public static final String age = "age";
+	//
+	public static final String datasource = "--datasource";
+	// 配置文件路径
 }

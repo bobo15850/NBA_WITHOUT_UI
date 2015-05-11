@@ -1,151 +1,125 @@
 package businesslogic.players;
 
-import java.math.BigDecimal;
-
-import common.mydatastructure.MyTime;
-
-/*
- * 用以计算xx率
- */
 public class CalculationOfPlayerPerform {
 
-	public static double calHitRate(int hitNum, int shootNum) {
-		if (shootNum == 0) {
+	public static double calHitRate(final double hitNum, final double shotNum) {
+		if (shotNum == 0) {
 			return 0;
 		}
 		else {
-			double result = 0;
-			result = (double) hitNum / (double) shootNum;
-			return cutToFour(result);
+			double result = hitNum / shotNum;
+			return cutTail(result);
 		}
 	}// 计算命中率
 
-	public static double calEfficiency(double score, double rebound, double assist, double steal, double block, int shoot, int hit,
-			int freePointShoot, int freePointHit, int turnover, int numberOfMatch) {
-		if (numberOfMatch == 0) {
-			return 0;
-		}
-		else {
-			double result = (score + rebound + assist + steal + block) - (shoot - hit) - (freePointShoot - freePointHit) - turnover;
-			result = result / numberOfMatch;
-			return cutToFour(result);
-		}
+	public static double calEfficiency(double point, double rebound, double assist, double steal, double blockShot, double totalShot, double totalHit, double freeShot, double freeHit, double fault,
+			int numOfGame) {
+		double result = ((point + rebound + assist + steal + blockShot) - (totalShot - totalHit) - (freeShot - freeHit) - fault) / numOfGame;
+		return cutTail(result);
 	}// 计算效率
 
-	public static double calImproveRateInFiveMatch(double beforeScore, double afterScore) {
-		double result = (afterScore - beforeScore) / beforeScore;
-		return cutToFour(result);
+	public static double calImproveRateInFiveMatch(double before, double after) {
+		double result = (after - before) / before;
+		return cutTail(result);
 	}// 计算提升率
 
-	public static double calGmSc(double score, int hit, int shoot, int freePointShoot, int freePointHit, int reboundBefore, int reboundAfter,
-			int steal, int assist, int block, int foul, int turnover, int numberOfMatch) {
-		if (numberOfMatch == 0) {
+	public static double calGmSc(double point, double totalHit, double totalShot, double freeShot, double freeHit, double offendRebound, double defendRebound, double steal, double assist,
+			double blockShot, double foul, double fault, int numOfGame) {
+		if (numOfGame == 0) {
 			return 0;
 		}
 		else {
-			double result = score + 0.4 * hit - 0.7 * shoot - 0.4 * (freePointShoot - freePointHit) + 0.7 * reboundBefore + 0.3 * reboundAfter
-					+ steal + 0.7 * assist + 0.7 * block - 0.4 * foul - turnover;
-			result = result / numberOfMatch;
-			return cutToFour(result);
+			double result = (point + 0.4 * totalHit - 0.7 * totalShot - 0.4 * (freeShot - freeHit) + 0.7 * offendRebound + 0.3 * defendRebound + steal + 0.7 * assist + 0.7 * blockShot - 0.4 * foul - fault)
+					/ numOfGame;
+			return cutTail(result);
 		}
 	}// 计算GMSC效率
 
-	public static double calRealShot(double score, int shoot, int freePointShoot) {
-		if (shoot == 0 && freePointShoot == 0) {
+	public static double calRealShot(double point, double totalShot, double freeShot) {
+		if (totalShot == 0 && freeShot == 0) {
 			return 0;
 		}
 		else {
 			double result = 0;
-			result = score / (double) (2 * (shoot + 0.44 * freePointShoot));
-			return cutToFour(result);
+			result = point / (2 * (totalShot + 0.44 * freeShot));
+			return cutTail(result);
 		}
 	}// 计算真实命中率
 
-	public static double calShotEfficiency(int hit, int threePointHit, int shoot) {
-		if (shoot == 0) {
+	public static double calShotEfficiency(double totalHit, double threeHit, double totalShot) {
+		if (totalShot == 0) {
 			return 0;
 		}
 		else {
 			double result = 0;
-			result = ((double) (hit + 0.5 * threePointHit)) / (double) shoot;
-			return cutToFour(result);
+			result = (totalHit + 0.5 * threeHit) / totalShot;
+			return cutTail(result);
 		}
 	}// 计算投篮效率
 
-	public static double calReboundEfficient(int rebound, MyTime timeOfAllPlayer, MyTime playingTime, int totalReboundOfTeam,
-			int totalReboundOfCompetitor) {
-		int total = totalReboundOfTeam + totalReboundOfCompetitor;
-		if (!playingTime.isCorrectRead() || total == 0) {
+	public static double calReboundEfficient(double rebound, double teamMinute, double minute, double teamRebound, double oppRebound) {
+		double total = teamRebound + oppRebound;
+		if (minute == 0 || total == 0) {
 			return 0;
 		}
 		else {
-			double result = timeOfAllPlayer.divide(playingTime) / 5 * rebound / total;
-			return cutToFour(result);
+			double result = (teamMinute / minute) / 5 * rebound / total;
+			return cutTail(result);
 		}
 	}// 计算篮板率
 
-	public static double calAssistEfficient(int assist, MyTime playingTime, MyTime timeOfAllPlayer, int hitOfAllPlayer, int hitOfOnePlayer) {
-		if (!playingTime.isCorrectRead() || !timeOfAllPlayer.isCorrectRead()) {
+	public static double calAssistEfficient(double assist, double minute, double teamMinute, double teamTotalHit, double totalHit) {
+		if (minute == 0 || teamMinute == 0) {
 			return 0;
 		}
 		else {
-			double result = assist / (playingTime.divide(timeOfAllPlayer) * 5 * hitOfAllPlayer - hitOfOnePlayer);
-			return cutToFour(result);
+			double result = assist / ((minute / teamMinute) * 5 * teamTotalHit - totalHit);
+			return cutTail(result);
 		}
 	}// 计算助攻率
 
-	public static double calStealEfficient(int steal, MyTime timeOfAllPlayer, MyTime playingTime, int offensiveNumOfCompetitor) {
-		if (!playingTime.isCorrectRead() || offensiveNumOfCompetitor == 0) {
+	public static double calStealEfficient(double steal, double teamMinute, double minute, double oppOffendRound) {
+		if (minute == 0 || oppOffendRound == 0) {
 			return 0;
 		}
 		else {
-			double result = steal * timeOfAllPlayer.divide(playingTime) / 5 / offensiveNumOfCompetitor;
-			return cutToFour(result);
+			double result = steal * (teamMinute / minute) / 5 / oppOffendRound;
+			return cutTail(result);
 		}
 	}// 计算抢断率
 
-	public static double calBlockShotEfficient(int block, MyTime timeOfAllPlayer, MyTime playingTime, double twoPointShootNumOfCompetitor) {
-		if (!playingTime.isCorrectRead() || twoPointShootNumOfCompetitor == 0) {
+	public static double calBlockShotEfficient(double blockShot, double teamMinute, double minute, double oppTwoShot) {
+		if (minute == 0 || oppTwoShot == 0) {
 			return 0;
 		}
 		else {
-			double result = block * timeOfAllPlayer.divide(playingTime) / 5 / twoPointShootNumOfCompetitor;
-			return cutToFour(result);
+			double result = blockShot * (teamMinute / minute) / 5 / oppTwoShot;
+			return cutTail(result);
 		}
 	}// 计算该盖帽率
 
-	public static double calFaultEfficient(int faultNum, int twoPointShootNum, int freePointShootNum) {
-		if (faultNum == 0 && twoPointShootNum == 0 && freePointShootNum == 0) {
+	public static double calFaultEfficient(double fault, double twoShot, double freeShot) {
+		if (fault == 0 && twoShot == 0 && freeShot == 0) {
 			return 0;
 		}
 		else {
-			double result = 0;
-			result = (double) faultNum / (double) (twoPointShootNum + 0.44 * freePointShootNum + faultNum);
-			return cutToFour(result);
+			double result = fault / (twoShot + 0.44 * freeShot + fault);
+			return cutTail(result);
 		}
 	}// 计算失误率
 
-	public static double calFrequency(int shootNum, int freePointShootNum, int faultNum, MyTime timeOfAllPlayer, MyTime playingTime,
-			int shootNumOfAllPlayer, int freePointShootNumOfAllPlayer, int faultNumOfAllPlayer) {
-		double temp = shootNumOfAllPlayer + 0.44 * freePointShootNumOfAllPlayer + faultNumOfAllPlayer;
-		if (temp == 0 || !timeOfAllPlayer.isCorrectRead() || !playingTime.isCorrectRead()) {
+	public static double calFrequency(double totalShot, double freeShot, double fault, double teamMinute, double minute, double teamTotalShot, double teamFreeShot, double teamFault) {
+		double temp = teamTotalShot + 0.44 * teamFreeShot + teamFault;
+		if (temp == 0 || teamMinute == 0 || minute == 0) {
 			return 0;
 		}
 		else {
-			double result = (shootNum + 0.44 * freePointShootNum + faultNum) * timeOfAllPlayer.divide(playingTime) / 5 / temp;
-			return cutToFour(result);
+			double result = (totalShot + 0.44 * freeShot + fault) * (teamMinute / minute) / 5 / temp;
+			return cutTail(result);
 		}
 	}// 计算使用率
 
-	public static double cutToTwo(double number) {
-		BigDecimal bigDecimal = new BigDecimal(number);
-		double result = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-		return result;
-	}// 保留两位小数
-
-	public static double cutToFour(double number) {
-		BigDecimal bigDecimal = new BigDecimal(number);
-		double result = bigDecimal.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
-		return result;
+	public static double cutTail(double number) {
+		return number;
 	}// 保留四位小数
 }
