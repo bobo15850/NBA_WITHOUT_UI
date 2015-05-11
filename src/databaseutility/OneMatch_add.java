@@ -209,7 +209,7 @@ public class OneMatch_add extends OneMatch_init {
 		double penalty = (CalculationOfTeamPerform.calHitRate(freeHit, freeShot));
 		double shot = (CalculationOfTeamPerform.calHitRate(totalHit, totalShot));
 		double three = (CalculationOfTeamPerform.calHitRate(threeHit, threeShot));
-		double efficiency = (CalculationOfPlayerPerform.calEfficiency(point, totalRebound, assist, steal, blockShot, threeShot, totalHit, freeShot, freeHit, fault, numOfGame));
+		double efficiency = (CalculationOfPlayerPerform.calEfficiency(point, totalRebound, assist, steal, blockShot, totalShot, totalHit, freeShot, freeHit, fault, numOfGame));
 		// 以下为所在球队比赛数据
 		double teamDefendRebound = (playerN.getTeamDefendRebound() + selfTeam.getDefendRebound());
 		double teamFault = (playerN.getTeamFault() + selfTeam.getFault());
@@ -218,14 +218,16 @@ public class OneMatch_add extends OneMatch_init {
 		double teamOffendRebound = (playerN.getTeamOffendRebound() + selfTeam.getOffendRebound());
 		double teamTotalHit = (playerN.getTeamTotalHit() + selfTeam.getTotalHit());
 		double teamTotalRebound = (playerN.getTeamTotalRebound() + selfTeam.getRebound());
-		double teamTotalshot = (playerN.getTotalShot() + selfTeam.getTotalShot());
+		double teamTotalshot = (playerN.getTeamTotalShot() + selfTeam.getTotalShot());
 		// 以下为对手数据
 		double oppTotalShot = (playerN.getOppTotalShot() + oppTeam.getTotalShot());
 		double oppThreeShot = (playerN.getOppThreeShot() + oppTeam.getThreeShot());
 		double oppTotalRebound = (playerN.getOppRebound() + oppTeam.getRebound());
 		double oppOffendRebound = (playerN.getOppOffendRebound() + oppTeam.getOffendRebound());
 		double oppDefendRebound = (playerN.getOppDefendRebound() + oppTeam.getDefendRebound());
-		double oppOffendRound = CalculationOfTeamPerform.calOffendRound(totalShot, totalHit, freeShot, offendRebound, defendRebound, fault);// 对手进攻回合数（防守回合数）
+		double oppOffendRound = playerN.getOppOffendRound()
+				+ CalculationOfTeamPerform.calOffendRound(oppTeam.getTotalShot(), oppTeam.getTotalHit(), oppTeam.getFreeShot(), oppTeam.getOffendRebound(), selfTeam.getDefendRebound(),
+						oppTeam.getFault());// 对手进攻回合数（防守回合数）
 		// /////
 		// ////
 		playerN.setTeamName(playerP.getTeamName());
@@ -262,8 +264,9 @@ public class OneMatch_add extends OneMatch_init {
 		playerN.setTeamOffendRebound(teamOffendRebound);
 		playerN.setTeamTotalHit(teamTotalHit);
 		playerN.setTeamTotalRebound(teamTotalRebound);
-		playerN.setTeamTotalshot(totalShot);
+		playerN.setTeamTotalshot(teamTotalshot);
 		// 以下为对手数据
+		playerN.setOppOffendRound(oppOffendRound);
 		playerN.setOppTotalShot(oppTotalShot);
 		playerN.setOppThreeShot(oppThreeShot);
 		playerN.setOppRebound(oppTotalRebound);

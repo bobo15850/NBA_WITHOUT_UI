@@ -203,6 +203,7 @@ public class CACHE {
 			playerN.setTeamTotalRebound(teamTotalRebound);
 			playerN.setTeamTotalshot(teamTotalshot);
 			// 以下为对手数据
+			playerN.setOppOffendRound(oppOffendRound);
 			playerN.setOppTotalShot(oppTotalShot);
 			playerN.setOppThreeShot(oppThreeShot);
 			playerN.setOppRebound(oppTotalRebound);

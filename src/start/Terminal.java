@@ -22,10 +22,18 @@ import common.statics.Field;
 import common.statics.PathOfFile;
 
 public class Terminal {
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
 		Terminal terminal = new Terminal();
 		terminal.excute(System.out, new String[] { "--datasource", "d:/TestTool/data" });
-		terminal.excute(System.out, new String[] { "-player", "-avg", "-sort", "efficient.desc" });
+		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
+		Thread.sleep(20000);
+		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
+		Thread.sleep(20000);
+		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
+		Thread.sleep(20000);
+		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
+		Thread.sleep(20000);
+		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
 	}
 
 	private static boolean isInit = false;

@@ -16,7 +16,6 @@ import test.data.PlayerNormalInfo;
 import autoTestService.PlayerAutoTestService;
 import businesslogic.CACHE;
 import businesslogic.MySort;
-
 import common.mydatastructure.Filter;
 import common.mydatastructure.GeneralInfoOfPlayer;
 import common.mydatastructure.MyDate;
@@ -27,8 +26,8 @@ import common.statics.Age;
 import common.statics.Field;
 import common.statics.League;
 import common.statics.Position;
-
 import data.players.PlayerInfoData;
+import databaseutility.MEM;
 import dataservice.players.PlayerInfoDataService;
 
 public class PlayerAutoTest implements PlayerAutoTestService {
@@ -184,6 +183,7 @@ public class PlayerAutoTest implements PlayerAutoTestService {
 			fieldChange = Field.point;
 		}
 		ArrayList<PlayerPerformOfOneMatch> playerPerformOneDay = new ArrayList<PlayerPerformOfOneMatch>();
+		System.out.println(MEM.LATEST_DATE.getFormatString());
 		for (Entry<String, PlayerPerformOfOneMatch> playerPerformOfOneMatch : CACHE.PLAYER_TODAY.entrySet()) {
 			playerPerformOneDay.add(playerPerformOfOneMatch.getValue());
 		}
@@ -259,8 +259,7 @@ public class PlayerAutoTest implements PlayerAutoTestService {
 			PlayerNormalInfo_Expand playerNormal_avg = temp.getValue().getPlayerNormal_avg();
 			GeneralInfoOfPlayer generalInfo = playerData.getGeneralInfoOfOnePlayer(playerNormal_avg.getName());
 			String league = playerData.getLeague(playerNormal_avg.getName());
-			if (this.isAgeSuit(filter.getAge(), generalInfo.getAge()) && this.isLeagueSuit(filter.getLeague(), league)
-					&& this.isPositionSuit(filter.getPosition(), generalInfo.getPosition())) {
+			if (this.isAgeSuit(filter.getAge(), generalInfo.getAge()) && this.isLeagueSuit(filter.getLeague(), league) && this.isPositionSuit(filter.getPosition(), generalInfo.getPosition())) {
 				playerNormalList.add(playerNormal_avg);
 			}
 		}// 三个筛选条件
@@ -290,8 +289,7 @@ public class PlayerAutoTest implements PlayerAutoTestService {
 			PlayerNormalInfo_Expand playerNormal = temp.getValue();
 			GeneralInfoOfPlayer generalInfo = playerData.getGeneralInfoOfOnePlayer(playerNormal.getName());
 			String league = playerData.getLeague(playerNormal.getName());
-			if (this.isAgeSuit(filter.getAge(), generalInfo.getAge()) && this.isLeagueSuit(filter.getLeague(), league)
-					&& this.isPositionSuit(filter.getPosition(), generalInfo.getPosition())) {
+			if (this.isAgeSuit(filter.getAge(), generalInfo.getAge()) && this.isLeagueSuit(filter.getLeague(), league) && this.isPositionSuit(filter.getPosition(), generalInfo.getPosition())) {
 				playerNormalList.add(playerNormal);
 			}
 		}// 三个筛选条件

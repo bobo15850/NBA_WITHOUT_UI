@@ -26,6 +26,7 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 	private double teamFreeShot = 0;// 球队所有罚球数
 	private double teamFault = 0;// 球队所有失误数
 	// 以下为对手球队数据
+	private double oppOffendRound = 0;// 对手进攻回合数
 	private double oppTotalShot = 0;// 对手总出手数
 	private double oppThreeShot = 0;// 对手三分出手数
 	private double oppRebound = 0;// 对手所有篮板数
@@ -216,7 +217,7 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 		this.teamTotalHit = teamTotalHit;
 	}
 
-	public double getTeamTotalshot() {
+	public double getTeamTotalShot() {
 		return teamTotalshot;
 	}
 
@@ -238,5 +239,13 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 
 	public void setTeamFault(double teamFault) {
 		this.teamFault = teamFault;
+	}
+
+	public double getOppOffendRound() {
+		return oppOffendRound;
+	}
+
+	public void setOppOffendRound(double oppOffendRound) {
+		this.oppOffendRound = oppOffendRound;
 	}
 }
