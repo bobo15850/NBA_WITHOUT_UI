@@ -12,8 +12,9 @@ public class CalculationOfPlayerPerform {
 		}
 	}// 计算命中率
 
-	public static double calEfficiency(double point, double rebound, double assist, double steal, double blockShot, double totalShot, double totalHit, double freeShot, double freeHit, double fault) {
-		double result = (point + rebound + assist + steal + blockShot) - (totalShot - totalHit) - (freeShot - freeHit) - fault;
+	public static double calEfficiency(double point, double rebound, double assist, double steal, double blockShot, double totalShot, double totalHit, double freeShot, double freeHit, double fault,
+			int numOfGame) {
+		double result = ((point + rebound + assist + steal + blockShot) - (totalShot - totalHit) - (freeShot - freeHit) - fault) / numOfGame;
 		return cutTail(result);
 	}// 计算效率
 

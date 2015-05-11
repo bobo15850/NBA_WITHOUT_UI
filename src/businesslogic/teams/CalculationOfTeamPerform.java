@@ -82,7 +82,7 @@ public class CalculationOfTeamPerform {
 			return 0;
 		}
 		else {
-			double result = defendRebound / oppOffendRebound;
+			double result = defendRebound / total;
 			return cutTail(result);
 		}
 	}// 计算防守篮板效率

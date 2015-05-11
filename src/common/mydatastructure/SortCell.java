@@ -11,6 +11,9 @@ public class SortCell {
 		try {
 			field = part[0];
 			order = part[1];
+			if (field.equals("efficient")) {
+				field = "efficiency";
+			}
 		} catch (IndexOutOfBoundsException i) {
 			i.printStackTrace();
 		}

@@ -39,9 +39,11 @@ public class OneMatch_init extends OneMatch {
 			oneTeamPerform.put(date, teamPo);
 		}
 		else {
-			oneTeamPerform = new TreeMap<MyDate, TeamPerformOfOneMatch>();
-			oneTeamPerform.put(date, teamPo);
-			MEM.TEAM_PERFORM.put(teamNameForShort, oneTeamPerform);
+			if (teamNameForShort != null) {
+				oneTeamPerform = new TreeMap<MyDate, TeamPerformOfOneMatch>();
+				oneTeamPerform.put(date, teamPo);
+				MEM.TEAM_PERFORM.put(teamNameForShort, oneTeamPerform);
+			}
 		}
 	}
 

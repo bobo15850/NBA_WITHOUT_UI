@@ -122,7 +122,7 @@ public class OneMatch_add extends OneMatch_init {
 		double offendRound = CalculationOfTeamPerform.calOffendRound(totalShot, totalHit, freeShot, offendRebound, oppDefendRebound, fault);// 进攻回合数
 		double oppOffendRound = CalculationOfTeamPerform.calOffendRound(oppTotalShot, oppTotalHit, oppFreeShot, oppOffendRebound, defendRebound, oppFault);// 防守回合数（对手进攻回合数）
 		teamH.setWinRate(CalculationOfTeamPerform.calWinRate(numOfWin, numOfGame));// 胜率
-		teamH.setOffendRound(offendRound);// 进攻回合数
+		teamH.setOffendRound(offendRound / numOfGame);// 进攻回合数
 		teamH.setOffendEfficient(CalculationOfTeamPerform.calOffendEfficient(point, offendRound));// 进攻效率
 		teamH.setDefendEfficient(CalculationOfTeamPerform.calDeffendEfficient(oppPoint, oppOffendRound));// 防守效率
 		teamH.setOffendReboundEfficient(CalculationOfTeamPerform.calOffendReboundEfficient(offendRebound, oppDefendRebound));// 进攻篮板效率
@@ -209,7 +209,7 @@ public class OneMatch_add extends OneMatch_init {
 		double penalty = (CalculationOfTeamPerform.calHitRate(freeHit, freeShot));
 		double shot = (CalculationOfTeamPerform.calHitRate(totalHit, totalShot));
 		double three = (CalculationOfTeamPerform.calHitRate(threeHit, threeShot));
-		double efficiency = (CalculationOfPlayerPerform.calEfficiency(point, totalRebound, assist, steal, blockShot, threeShot, totalHit, freeShot, freeHit, fault));
+		double efficiency = (CalculationOfPlayerPerform.calEfficiency(point, totalRebound, assist, steal, blockShot, threeShot, totalHit, freeShot, freeHit, fault, numOfGame));
 		// 以下为所在球队比赛数据
 		double teamDefendRebound = (playerN.getTeamDefendRebound() + selfTeam.getDefendRebound());
 		double teamFault = (playerN.getTeamFault() + selfTeam.getFault());

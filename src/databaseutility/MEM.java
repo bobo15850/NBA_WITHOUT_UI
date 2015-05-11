@@ -2,8 +2,9 @@ package databaseutility;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -11,9 +12,11 @@ import common.mydatastructure.GeneralInfoOfPlayer;
 import common.mydatastructure.MyDate;
 import common.mydatastructure.PlayerPerformOfOneMatch;
 import common.mydatastructure.TeamPerformOfOneMatch;
+import common.statics.Age;
 import common.statics.League;
 import common.statics.NUMBER;
 import common.statics.PathOfFile;
+import common.statics.Position;
 
 public class MEM {
 
@@ -31,9 +34,9 @@ public class MEM {
 	public static MyDate LATEST_DATE = new MyDate(0, 0, 0);
 	// 指示当前的日期
 	static {
-		MEM.handleFileOfMatches();
 		MEM.handleFileOfPlayers();
 		MEM.handleFileOfTeams();
+		MEM.handleFileOfMatches();
 	}
 
 	private static void handleFileOfMatches() {
@@ -59,7 +62,7 @@ public class MEM {
 
 	private static void handleFileOfTeams() {
 		try {
-			BufferedReader teamReader = new BufferedReader(new FileReader(PathOfFile.TEAM_INFO + "teams"));
+			BufferedReader teamReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(PathOfFile.TEAM_INFO + "teams")), "UTF-8"));
 			teamReader.readLine();
 			String formatdetail;
 			for (int i = 0; i < NUMBER.NUMBER_OF_TEAM; i++) {
@@ -75,7 +78,7 @@ public class MEM {
 	private static void writePlayerInfoToMEM(String playerName) throws IOException {
 		String part[];
 		String[] element = new String[9];
-		BufferedReader playerReader = new BufferedReader(new FileReader(PathOfFile.PLAYER_INFO + playerName));
+		BufferedReader playerReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(PathOfFile.PLAYER_INFO + playerName)), "UTF-8"));
 		playerReader.readLine();
 		String temp;
 		for (int i = 0; i < 9; i++) {
@@ -92,9 +95,17 @@ public class MEM {
 			playerReader.readLine();
 		}
 		GeneralInfoOfPlayer playerInfoPo = new GeneralInfoOfPlayer();
-		playerInfoPo.setName(element[0]);
+		if (!element[0].equals("null")) {
+			playerInfoPo.setName(element[0]);
+		}
+		else {
+			playerInfoPo.setName(playerName);
+		}
+		if (element[2].equals("null")) {
+			element[2] = Position.UNKUOWN_POSITION;
+		}
 		playerInfoPo.setPosition(element[2]);
-		playerInfoPo.setAge(toInt(element[6]));
+		playerInfoPo.setAge(toAge(element[6]));
 		playerReader.close();
 		MEM.PLAYER_GENERALINFO.put(playerName, playerInfoPo);
 	}
@@ -102,20 +113,25 @@ public class MEM {
 	private static void writeTeamInfoToMEM(String formatdetail) {
 		String[] part = formatdetail.split("│");
 		String league = part[3].trim();
+		if (part[1].equals("NOP")) {
+			part[1] = "NOH";
+		}
 		if (league.equals("E")) {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.East);
 		}
 		else if (league.equals("W")) {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.West);
 		}
-	}
-
-	private static int toInt(String str) {
-		try {
-			return Integer.parseInt(str);
-		} catch (NumberFormatException e) {
-			return -1;
+		else {
+			MEM.TEAM_LEAGUE.put(part[1].trim(), League.UNKNOWN_LEAGUE);
 		}
 	}
 
+	private static int toAge(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (NumberFormatException e) {
+			return Age.UNKNOWN_AGE;
+		}
+	}
 }

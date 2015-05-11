@@ -144,7 +144,7 @@ public class PlayerNormalInfo_Expand extends PlayerNormalInfo {
 		playerNormal_avg.setBlockShot(CalculationOfPlayerPerform.cutTail(getBlockShot() / numOfGame));
 		playerNormal_avg.setDefend(CalculationOfPlayerPerform.cutTail(getDefend() / numOfGame));
 		playerNormal_avg.setDoubleTwo(doubleTwo);
-		playerNormal_avg.setEfficiency(getEfficiency() / numOfGame);
+		playerNormal_avg.setEfficiency(getEfficiency());
 		playerNormal_avg.setFault(CalculationOfPlayerPerform.cutTail(getFault() / numOfGame));
 		playerNormal_avg.setFoul(CalculationOfPlayerPerform.cutTail(getFoul() / numOfGame));
 		playerNormal_avg.setFreeHit(CalculationOfPlayerPerform.cutTail(freeHit / numOfGame));
