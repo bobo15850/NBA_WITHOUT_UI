@@ -120,7 +120,12 @@ public class MEM {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.East);
 		}
 		else if (league.equals("W")) {
-			MEM.TEAM_LEAGUE.put(part[1].trim(), League.West);
+			if (part[1].trim().equals("BOS")) {
+				MEM.TEAM_LEAGUE.put(part[1].trim(), League.East);
+			}
+			else {
+				MEM.TEAM_LEAGUE.put(part[1].trim(), League.West);
+			}
 		}
 		else {
 			MEM.TEAM_LEAGUE.put(part[1].trim(), League.UNKNOWN_LEAGUE);

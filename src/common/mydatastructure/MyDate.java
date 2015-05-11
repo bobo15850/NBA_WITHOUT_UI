@@ -62,4 +62,14 @@ public class MyDate implements Comparable<MyDate> {
 			return -1;
 		}
 	}
+
+	public boolean equals(Object date) {
+		MyDate d = (MyDate) date;
+		if ((this.year == d.year) && (this.month == d.month) && (this.day == d.day)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

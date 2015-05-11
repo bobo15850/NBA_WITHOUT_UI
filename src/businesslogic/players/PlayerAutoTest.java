@@ -27,7 +27,6 @@ import common.statics.Field;
 import common.statics.League;
 import common.statics.Position;
 import data.players.PlayerInfoData;
-import databaseutility.MEM;
 import dataservice.players.PlayerInfoDataService;
 
 public class PlayerAutoTest implements PlayerAutoTestService {
@@ -183,7 +182,6 @@ public class PlayerAutoTest implements PlayerAutoTestService {
 			fieldChange = Field.point;
 		}
 		ArrayList<PlayerPerformOfOneMatch> playerPerformOneDay = new ArrayList<PlayerPerformOfOneMatch>();
-		System.out.println(MEM.LATEST_DATE.getFormatString());
 		for (Entry<String, PlayerPerformOfOneMatch> playerPerformOfOneMatch : CACHE.PLAYER_TODAY.entrySet()) {
 			playerPerformOneDay.add(playerPerformOfOneMatch.getValue());
 		}

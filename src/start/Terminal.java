@@ -25,15 +25,10 @@ public class Terminal {
 	public static void main(String args[]) throws Exception {
 		Terminal terminal = new Terminal();
 		terminal.excute(System.out, new String[] { "--datasource", "d:/TestTool/data" });
-		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
-		Thread.sleep(20000);
-		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
-		Thread.sleep(20000);
-		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
-		Thread.sleep(20000);
-		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
-		Thread.sleep(20000);
-		terminal.excute(System.out, new String[] { "-player", "-king", "score", "-daily" });
+		terminal.excute(System.out, new String[] { "-player", "-filter", "position.F,league.East" });
+		if (CACHE.PLAYER_NORMAL.containsKey("Jeff Green")) {
+			System.out.println(CACHE.PLAYER_NORMAL.get("Jeff Green").getPlayerNormal_avg().toString());
+		}
 	}
 
 	private static boolean isInit = false;
@@ -51,7 +46,6 @@ public class Terminal {
 			isInit = true;
 			new Refresh().start();
 		}
-
 	}// 启动监控数据源线程
 
 	public void excute(PrintStream out, String args[]) {
